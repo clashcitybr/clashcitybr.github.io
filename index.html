@@ -99,7 +99,10 @@
         }
 
         @media (max-width: 900px) {
-            .hamburger { display: block; }
+            .hamburger {
+                display: block;
+            }
+
             .nav-links {
                 position: fixed;
                 right: -100%;
@@ -111,13 +114,29 @@
                 justify-content: center;
                 align-items: center;
                 transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
             }
-            .nav-links.active { right: 0; }
-            .nav-links a { font-size: 1.2rem; margin: 15px 0; }
-            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                margin: 15px 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
         }
 
         /* --- RESTANTE DO SEU CSS MANTIDO --- */
@@ -241,10 +260,11 @@
             flex: 1 1 45%;
             max-width: 560px;
             aspect-ratio: 16 / 9;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .video-item iframe {
@@ -263,11 +283,33 @@
             color: white;
         }
 
-        .about-content{ flex: 1; min-width: 300px; }
-        .about-content h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        .about-content p { margin-bottom: 15px; opacity: 0.9; font-size: 1.1rem; }
-        .about-image { flex: 1; text-align: center; min-width: 300px; }
-        .about-image img { max-width: 80%; filter: drop-shadow(0 0 20px var(--secondary)); }
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            max-width: 80%;
+            filter: drop-shadow(0 0 20px var(--secondary));
+        }
 
         footer {
             background: #000;
@@ -276,9 +318,19 @@
             text-align: center;
         }
 
-        .social-links { margin-bottom: 20px; }
-        .social-links img { width: 35px; margin: 0 10px; transition: 0.3s; }
-        .social-links img:hover { transform: translateY(-5px); }
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links img {
+            width: 35px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .social-links img:hover {
+            transform: translateY(-5px);
+        }
 
         .scroll-anim {
             opacity: 0;
@@ -292,8 +344,13 @@
         }
 
         @media (max-width: 768px) {
-            .video-item { flex: 1 1 100%; }
-            header h1 { font-size: 2.5rem; }
+            .video-item {
+                flex: 1 1 100%;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -302,7 +359,7 @@
 
     <nav>
         <div class="nav-container">
-            
+
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -322,7 +379,8 @@
 
     <header>
         <h1 class="scroll-anim">Família Clash City BR</h1>
-        <p class="scroll-anim">União, estratégia e evolução desde 2017. Junte-se a uma comunidade ativa e conquiste o topo conosco!</p>
+        <p class="scroll-anim">União, estratégia e evolução desde 2017. Junte-se a uma comunidade ativa e conquiste o
+            topo conosco!</p>
     </header>
 
     <section id="clans" class="clans-section">
@@ -338,7 +396,8 @@
                     <li>Guerra Frequente</li>
                     <li>Vagas Limitadas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -346,12 +405,13 @@
                 <h3>CLASH CITY BR 2</h3>
                 <p><strong>Secundário</strong></p>
                 <ul>
-                    <li>Centro de Vila: 15+</li> 
+                    <li>Centro de Vila: 15+</li>
                     <li>Liga: Mestre 1</li>
                     <li>Foco em Evolução</li>
                     <li>Usado para Ligas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -364,7 +424,8 @@
                     <li>Aberto a Novatos</li>
                     <li>Dicas e Treino</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
         </div>
     </section>
@@ -373,16 +434,24 @@
         <h2 class="scroll-anim">Vídeos em Destaque</h2>
         <div class="video-grid scroll-anim">
             <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/Rinc3K7NW-8?si=oPGjBiqZBOcdyVF2" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Rinc3K7NW-8?si=oPGjBiqZBOcdyVF2" title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/BI_p0ctWxn8?si=1kl0nDFxPgXjE575" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/BI_p0ctWxn8?si=1kl0nDFxPgXjE575" title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/CetQipgNnRI?si=B9SgGTMyZLBwZ826" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/CetQipgNnRI?si=B9SgGTMyZLBwZ826" title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy"></iframe>
             </div>
             <div class="video-item">
-                <iframe src="https://www.youtube.com/embed/y--JgClUGt0?si=ILgGNMsViihYfZjd" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/y--JgClUGt0?si=ILgGNMsViihYfZjd" title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -390,9 +459,11 @@
     <section id="sobre" class="about-section">
         <div class="about-content scroll-anim">
             <h2>Sobre a Família</h2>
-            <p>O Clash City BR é um clã consolidado, presente no jogo desde 24 de janeiro de 2017. Mantemos uma base sólida formada por jogadores experientes e dedicados.</p>
+            <p>O Clash City BR é um clã consolidado, presente no jogo desde 24 de janeiro de 2017. Mantemos uma base
+                sólida formada por jogadores experientes e dedicados.</p>
             <p>Contamos com grupo organizado no WhatsApp para alinhamento de ataques e estratégias.</p>
-            <p><strong>Destaques do Clã:</strong> Carlos Daniel, Zaga-0, Dking Bacon, Kyros, Souza, Victor Hugo, Weller, Rafael, Nettim, J.Couto e outros veteranos.</p>
+            <p><strong>Destaques do Clã:</strong> Carlos Daniel, Zaga-0, Dking Bacon, Kyros, Souza, Victor Hugo, Weller,
+                Rafael, Nettim, J.Couto e outros veteranos.</p>
         </div>
         <div class="about-image scroll-anim">
             <img src="estilos/Imagens/Perfil_COC-removebg-preview.png" alt="Logo Clash City">
@@ -401,9 +472,12 @@
 
     <footer id="rodape">
         <div class="social-links">
-            <a href="https://wa.me/31995312787" target="_blank"><img src="estilos/Imagens/whatsapp.png" alt="WhatsApp"></a>
-            <a href="https://www.instagram.com/clashcitybr/" target="_blank"><img src="estilos/Imagens/Instagram_icon.png" alt="Instagram"></a>
-            <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+            <a href="https://wa.me/31995312787" target="_blank"><img src="estilos/Imagens/whatsapp.png"
+                    alt="WhatsApp"></a>
+            <a href="https://www.instagram.com/clashcitybr/" target="_blank"><img
+                    src="estilos/Imagens/Instagram_icon.png" alt="Instagram"></a>
+            <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank"><img
+                    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
         </div>
         <p>© 2026 Clash City BR - Todos os direitos reservados.</p>
     </footer>
@@ -449,4 +523,5 @@
         document.querySelectorAll('.scroll-anim').forEach((el) => observer.observe(el));
     </script>
 </body>
+
 </html>
