@@ -192,7 +192,8 @@
         // --- NOVO: REQUISIÇÃO DINÂMICA DO BANCO DE DADOS ---
         async function carregarDashboard() {
             try {
-                const response = await fetch('http://localhost:3333/membros');
+                // ENDEREÇO DA SUA API LOCAL REDIRECIONADO PARA A INTERNET
+                const API_URL = "https://cork-dice-gala.ngrok-free.dev/membros";
                 if (!response.ok) throw new Error('Falha na API');
 
                 const membros = await response.json();
