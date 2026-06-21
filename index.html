@@ -5,445 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="estilos/Imagens/Perfil_COC-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
     <title>Clash City BR - Família de Clãs</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #f9d246;
-            --secondary: #077187;
-            --dark: #11032c;
-            --light: #ffffff;
-            --accent: #6aa5ed;
-            --glass: rgba(255, 255, 255, 0.92);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Lexend', sans-serif;
-            background-color: #f0f2f5;
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION ATUALIZADA --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            height: 70px;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-text {
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 1.2rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 10000;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 5px 0;
-            transition: 0.4s;
-        }
-
-        /* --- NOVO: CSS DO DASHBOARD DINÂMICO --- */
-        .dashboard-section {
-            padding: 60px 5%;
-            background: #f0f2f5;
-            max-width: 100vw;
-            margin: -40px auto 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .dash-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .dash-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .mvp-card {
-            background: linear-gradient(135deg, #11032c 0%, #077187 100%);
-            border-radius: 20px;
-            padding: 30px;
-            color: white;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(7, 113, 135, 0.2);
-            border: 2px solid var(--primary);
-        }
-
-        .mvp-badge {
-            background: var(--primary);
-            color: var(--dark);
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-box {
-            background: var(--glass);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .stat-box h4 {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .stat-box .number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark);
-        }
-
-        @media (max-width: 900px) {
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 0;
-                width: 75%;
-                height: 100vh;
-                background: var(--dark);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links a {
-                font-size: 1.2rem;
-                margin: 15px 0;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 6px);
-            }
-
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -6px);
-            }
-        }
-
-        /* --- RESTANTE DO SEU CSS MANTIDO --- */
-        header {
-            height: 80vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('estilos/Imagens/inicio.webp') center/cover no-repeat fixed;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
-
-        header h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-        }
-
-        header p {
-            max-width: 700px;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .clans-section {
-            padding: 80px 5%;
-            background: linear-gradient(to bottom, #e0eafc, #cfdef3);
-        }
-
-        .clans-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-
-        .clan-card {
-            background: var(--glass);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .clan-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            transform: translateY(-12px) scale(1.02);
-        }
-
-        .clan-card img {
-            width: 120px;
-            margin-bottom: 20px;
-        }
-
-        .clan-card h3 {
-            color: var(--secondary);
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-        }
-
-        .clan-card ul {
-            list-style: none;
-            margin: 20px 0;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .clan-card li {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .clan-card li::before {
-            content: "⚡";
-            margin-right: 8px;
-        }
-
-        .btn-join {
-            display: block;
-            background: var(--primary);
-            color: var(--dark);
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 800;
-            transition: background 0.3s;
-        }
-
-        .btn-join:hover {
-            background: #077187;
-            color: white;
-        }
-
-        .video-section {
-            padding: 60px 5%;
-            background: var(--secondary);
-            color: white;
-            text-align: center;
-        }
-
-        .video-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 40px auto 0;
-        }
-
-        .video-item {
-            flex: 1 1 45%;
-            max-width: 560px;
-            aspect-ratio: 16 / 9;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-item iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .about-section {
-            padding: 100px 10%;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 50px;
-            background: #1a1a1a;
-            color: white;
-        }
-
-        .about-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-content h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .about-content p {
-            margin-bottom: 15px;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .about-image {
-            flex: 1;
-            text-align: center;
-            min-width: 300px;
-        }
-
-       .about-image {
-    perspective: 1000px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 40px;
-}
-
-.about-image {
-    perspective: 1000px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-}
-
-.about-image img {
-    max-width: 80%;
-    /* Inicia com uma sombra preta sutil por segurança */
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 0px rgba(0, 212, 255, 0));
-    transition: transform 0.15s ease-out, filter 0.15s ease-out;
-    transform-style: preserve-3d;
-    cursor: pointer;
-}
-        footer {
-            background: #000;
-            color: white;
-            padding: 40px 5%;
-            text-align: center;
-        }
-
-        .social-links {
-            margin-bottom: 20px;
-        }
-
-        .social-links img {
-            width: 35px;
-            margin: 0 10px;
-            transition: 0.3s;
-        }
-
-        .social-links img:hover {
-            transform: translateY(-5px);
-        }
-
-        .scroll-anim {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .scroll-anim.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .video-item {
-                flex: 1 1 100%;
-            }
-
-            header h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -575,7 +139,8 @@
             <p>O Clash City BR é um clã consolidado, presente no jogo desde 24 de janeiro de 2017. Mantemos uma base
                 sólida formada por jogadores experientes e dedicados.</p>
             <p>Contamos com grupo organizado no WhatsApp para alinhamento de ataques e estratégias.</p>
-            <p><strong>Destaques do Clã:</strong> Carlos Daniel, Zaga-0, Dking Bacon, Kyros, Souza, Victor Hugo, Weller, Nettim, xFrozen, J.Couto e outros veteranos.</p>
+            <p><strong>Destaques do Clã:</strong> Carlos Daniel, Zaga-0, Dking Bacon, Kyros, Souza, Victor Hugo, Weller,
+                Nettim, xFrozen, J.Couto e outros veteranos.</p>
         </div>
         <div class="about-image scroll-anim">
             <img src="estilos/Imagens/Perfil_COC-removebg-preview.png" alt="Logo Clash City">
@@ -665,39 +230,37 @@
         window.addEventListener('DOMContentLoaded', carregarDashboard);
 
 
-     // --- VERSÃO DIAGNÓSTICO FORÇADO ---
-// --- VERSÃO PROXY LOCAL (CORS BYPASS) ---
-async function carregarInstagram() {
-    try {
-        // Altera para consumir a rota que criamos no seu backend local
-        const urlBehold = 'http://localhost:3333/api/instagram'; // Ajuste a porta se o seu backend rodar em outra (ex: 5000)
+        // --- VERSÃO PROXY LOCAL (CORS BYPASS) ---
+        async function carregarInstagram() {
+            try {
+                const urlBehold = 'https://cork-dice-gala.ngrok-free.dev/api/instagram';
 
-        const response = await fetch(urlBehold);
-        if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+                const response = await fetch(urlBehold);
+                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
 
-        const dadosRecebidos = await response.json();
-        console.log("Dados lidos via Proxy Backend:", dadosRecebidos);
+                const dadosRecebidos = await response.json();
+                console.log("Dados lidos via Proxy Backend:", dadosRecebidos);
 
-        const posts = dadosRecebidos.posts || [];
-        const container = document.getElementById('insta-feed-container');
+                const posts = dadosRecebidos.posts || [];
+                const container = document.getElementById('insta-feed-container');
 
-        if (!posts || posts.length === 0) {
-            container.innerHTML = `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil diretamente em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
-            return;
-        }
+                if (!posts || posts.length === 0) {
+                    container.innerHTML = `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil diretamente em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
+                    return;
+                }
 
-        container.innerHTML = '';
+                container.innerHTML = '';
 
-        posts.slice(0, 4).forEach(post => {
-            const urlImagem = post.mediaType === 'VIDEO' || post.isReel 
-                ? post.thumbnailUrl 
-                : (post.mediaUrl || post.thumbnailUrl || '');
-                
-            const linkPost = post.permalink || 'https://instagram.com/clashcitybr';
-            const textoLegenda = post.caption || "Acesse para conferir a publicação completa.";
+                posts.slice(0, 4).forEach(post => {
+                    const urlImagem = post.mediaType === 'VIDEO' || post.isReel
+                        ? post.thumbnailUrl
+                        : (post.mediaUrl || post.thumbnailUrl || '');
 
-            const card = document.createElement('div');
-            card.style.cssText = `
+                    const linkPost = post.permalink || 'https://instagram.com/clashcitybr';
+                    const textoLegenda = post.caption || "Acesse para conferir a publicação completa.";
+
+                    const card = document.createElement('div');
+                    card.style.cssText = `
                 background: white;
                 border-radius: 15px;
                 overflow: hidden;
@@ -706,11 +269,11 @@ async function carregarInstagram() {
                 cursor: pointer;
             `;
 
-            card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
-            card.onmouseleave = () => card.style.transform = 'translateY(0)';
-            card.onclick = () => window.open(linkPost, '_blank');
+                    card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
+                    card.onmouseleave = () => card.style.transform = 'translateY(0)';
+                    card.onclick = () => window.open(linkPost, '_blank');
 
-            card.innerHTML = `
+                    card.innerHTML = `
                 <div style="width: 100%; aspect-ratio: 1/1; background: url('${urlImagem}') center/cover no-repeat;"></div>
                 <div style="padding: 15px; text-align: left; color: #11032c;">
                     <p style="font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; opacity: 0.8;">
@@ -718,17 +281,17 @@ async function carregarInstagram() {
                     </p>
                 </div>
             `;
-            container.appendChild(card);
-        });
+                    container.appendChild(card);
+                });
 
-    } catch (error) {
-        console.error('Erro ao processar o feed do Instagram:', error.message);
-        document.getElementById('insta-feed-container').innerHTML =
-            `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
-    }
-}
+            } catch (error) {
+                console.error('Erro ao processar o feed do Instagram:', error.message);
+                document.getElementById('insta-feed-container').innerHTML =
+                    `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
+            }
+        }
 
-      // Animação de Scroll
+        // Animação de Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -738,69 +301,65 @@ async function carregarInstagram() {
         }, { threshold: 0.1 });
         document.querySelectorAll('.scroll-anim').forEach((el) => observer.observe(el));
 
-        // --- DISPARO UNIFICADO DO SISTEMA ---
         // Esta função centraliza o carregamento das duas APIs de forma segura
         async function inicializarSite() {
             console.log("Iniciando carregamento dos dados do clã...");
-            
+
             // Dispara as duas funções em paralelo
             await Promise.all([
                 carregarDashboard(),
                 carregarInstagram()
             ]);
-            
+
             console.log("Todas as integrações foram processadas!");
         }
 
         // Executa a inicialização assim que o navegador terminar de ler o HTML
         window.addEventListener('DOMContentLoaded', inicializarSite);
 
-// --- ANIMAÇÃO INTERATIVA 3D COM LUZ NEON DINÂMICA ---
-  // --- ANIMAÇÃO INTERATIVA 3D COM BRILHO SUTIL ---
-function iniciarAnimacaoEmblema() {
-    const container = document.querySelector('.about-image');
-    const imagem = document.querySelector('.about-image img');
+        // --- ANIMAÇÃO INTERATIVA 3D COM BRILHO SUTIL ---
+        function iniciarAnimacaoEmblema() {
+            const container = document.querySelector('.about-image');
+            const imagem = document.querySelector('.about-image img');
 
-    if (!container || !imagem) return;
+            if (!container || !imagem) return;
 
-    container.addEventListener('mousemove', (e) => {
-        const box = container.getBoundingClientRect();
-        
-        // Centro do elemento
-        const centroX = box.left + box.width / 2;
-        const centroY = box.top + box.height / 2;
-        
-        // Distância do mouse (-1 até 1)
-        const rotX = (centroY - e.clientY) / (box.height / 2);
-        const rotY = (e.clientX - centroX) / (box.width / 2);
-        
-        const intensidadeInclinacao = 20; // Inclinação confortável
-        const deslocamentoLuz = 15;       // Quantos pixels a luz vai andar
+            container.addEventListener('mousemove', (e) => {
+                const box = container.getBoundingClientRect();
 
-        // Calcula a posição da sombra (invertida)
-        const sombraX = -rotY * deslocamentoLuz;
-        const sombraY = rotX * deslocamentoLuz;
+                // Centro do elemento
+                const centroX = box.left + box.width / 2;
+                const centroY = box.top + box.height / 2;
 
-        // Aplica a inclinação 3D
-        imagem.style.transform = `rotateX(${rotX * intensidadeInclinacao}deg) rotateY(${rotY * intensidadeInclinacao}deg) scale(0.98)`;
-        
-        // Injeta o brilho direto no contorno do tubarão de forma suave (blur de 15px)
-        imagem.style.filter = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0, 212, 255, 0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
-    });
+                // Distância do mouse (-1 até 1)
+                const rotX = (centroY - e.clientY) / (box.height / 2);
+                const rotY = (e.clientX - centroX) / (box.width / 2);
 
-    // Reseta tudo ao tirar o mouse
-    container.addEventListener('mouseleave', () => {
-        imagem.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-        imagem.style.filter = 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5))';
-    });
-}
-window.addEventListener('DOMContentLoaded', () => {
-    carregarDashboard();
-    carregarInstagram();
-    iniciarAnimacaoEmblema(); // <- Ativa o efeito do tubarão aqui
-});
-// Chame a função dentro do seu inicializarSite existente
-// Adicione "iniciarAnimacaoEmblema();" dentro do seu window.addEventListener ou Promise.all
+                const intensidadeInclinacao = 20; // Inclinação confortável
+                const deslocamentoLuz = 15;       // Quantos pixels a luz vai andar
+
+                // Calcula a posição da sombra (invertida)
+                const sombraX = -rotY * deslocamentoLuz;
+                const sombraY = rotX * deslocamentoLuz;
+
+                // Aplica a inclinação 3D
+                imagem.style.transform = `rotateX(${rotX * intensidadeInclinacao}deg) rotateY(${rotY * intensidadeInclinacao}deg) scale(0.98)`;
+
+                // Injeta o brilho direto no contorno do tubarão de forma suave (blur de 15px)
+                imagem.style.filter = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0, 212, 255, 0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
+            });
+
+            // Reseta tudo ao tirar o mouse
+            container.addEventListener('mouseleave', () => {
+                imagem.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+                imagem.style.filter = 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5))';
+            });
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            carregarDashboard();
+            carregarInstagram();
+            iniciarAnimacaoEmblema(); // <- Ativa o efeito do tubarão aqui
+        });
     </script>
 </body>
 
