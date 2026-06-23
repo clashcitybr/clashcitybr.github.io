@@ -14,13 +14,11 @@
 
     <nav>
         <div class="nav-container">
-
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-
             <div class="nav-links" id="nav-links">
                 <a href="https://clashcitybr.github.io/liga/">Liga</a>
                 <a href="#clans">Clãs</a>
@@ -51,8 +49,7 @@
                     <li>Guerra Frequente</li>
                     <li>Vagas Limitadas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2"
-                    class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2" class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -65,8 +62,7 @@
                     <li>Foco em Evolução</li>
                     <li>Usado para Ligas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0"
-                    class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0" class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -79,16 +75,13 @@
                     <li>Aberto a Novatos</li>
                     <li>Dicas e Treino</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8"
-                    class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8" class="btn-join">Solicitar Entrada</a>
             </div>
         </div>
     </section>
 
-    <!-- --- NOVO: PAINEL DE PERFORMANCE REAL-TIME --- -->
     <section class="dashboard-section">
         <div class="dash-grid">
-            <!-- CARD DO JOGADOR MVP -->
             <div class="mvp-card scroll-anim" id="mvp-container">
                 <span class="mvp-badge">👑 MVP DA TEMPORADA</span>
                 <h3 id="mvp-nome" style="font-size: 2rem; margin-bottom: 5px;">Carregando...</h3>
@@ -99,7 +92,6 @@
                 </div>
             </div>
 
-            <!-- BOXES DE MÉTRICAS DO CLÃ -->
             <div class="stats-grid">
                 <div class="stat-box scroll-anim">
                     <h4>Membros Rastreados</h4>
@@ -117,20 +109,16 @@
         </div>
     </section>
 
-    <!-- --- SEÇÃO DO INSTAGRAM ATUALIZADA --- -->
+    <!-- FIX 3: tag </section> duplicada removida -->
     <section id="instagram" class="video-section"
         style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); padding: 80px 5%;">
         <h2 class="scroll-anim" style="color: white; font-size: 2.5rem; margin-bottom: 10px;">Últimas Novidades</h2>
         <p class="scroll-anim" style="color: white; opacity: 0.9; margin-bottom: 40px;">Acompanhe nosso conteúdo diário
             direto do Instagram @clashcitybr</p>
-
-        <!-- Onde o JavaScript vai injetar os posts dinamicamente -->
         <div class="video-grid scroll-anim" id="insta-feed-container"
             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
-            <!-- Espaço reservado para o carregamento -->
             <p style="color: white; grid-column: 1/-1;">Carregando publicações...</p>
         </div>
-    </section>
     </section>
 
     <section id="sobre" class="about-section">
@@ -149,31 +137,34 @@
 
     <footer id="rodape">
         <div class="social-links">
-            <a href="https://wa.me/31995312787" target="_blank"><img src="estilos/Imagens/whatsapp.png"
-                    alt="WhatsApp"></a>
-            <a href="https://www.instagram.com/clashcitybr/" target="_blank"><img
-                    src="estilos/Imagens/Instagram_icon.png" alt="Instagram"></a>
-            <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank"><img
-                    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+            <a href="https://wa.me/31995312787" target="_blank">
+                <img src="estilos/Imagens/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.instagram.com/clashcitybr/" target="_blank">
+                <img src="estilos/Imagens/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+            </a>
         </div>
         <p>© 2026 Clash City BR - Todos os direitos reservados.</p>
     </footer>
 
     <script>
+        // ============================================================
+        // MENU HAMBÚRGUER
+        // ============================================================
         const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
+        const navLinks  = document.getElementById('nav-links');
 
-        // Abre/Fecha o menu ao clicar no botão
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
 
-        // FECHA AO TOCAR EM QUALQUER LUGAR DA TELA
         document.addEventListener('click', (e) => {
             if (navLinks.classList.contains('active')) {
-                // Se o clique não foi no menu nem no botão hambúrguer, fecha
                 if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('active');
@@ -181,7 +172,6 @@
             }
         });
 
-        // Fecha ao clicar em um link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -189,27 +179,33 @@
             });
         });
 
-        // --- NOVO: REQUISIÇÃO DINÂMICA DO BANCO DE DADOS ---
+        // ============================================================
+        // DASHBOARD — DADOS DO BANCO
+        // FIX 1: fetch() estava ausente; response era usada sem ser declarada
+        // ============================================================
         async function carregarDashboard() {
             try {
-                // ENDEREÇO DA SUA API LOCAL REDIRECIONADO PARA A INTERNET
                 const API_URL = "https://cork-dice-gala.ngrok-free.dev/membros";
-                if (!response.ok) throw new Error('Falha na API');
+                const response = await fetch(API_URL, {
+                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                });
+                if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
 
                 const membros = await response.json();
-                if (membros.length === 0) return;
+                if (!membros || membros.length === 0) return;
 
-                // 1. Renderiza o MVP (1º Lugar do Ranking)
+                // MVP: primeiro lugar ordenado por totalEstrelas (já vem ordenado do banco)
                 const mvp = membros[0];
-                const mediaMvp = mvp.guerras > 0 ? (mvp.totalEstrelas / mvp.guerras).toFixed(1) : "0.0";
-                document.getElementById('mvp-nome').innerText = mvp.nome;
-                document.getElementById('mvp-cv').innerText = `Centro de Vila ${mvp.cv}`;
+                const mediaMvp = mvp.guerras > 0
+                    ? (mvp.totalEstrelas / mvp.guerras).toFixed(1)
+                    : "0.0";
+
+                document.getElementById('mvp-nome').innerText  = mvp.nome;
+                document.getElementById('mvp-cv').innerText    = `Centro de Vila ${mvp.cv}`;
                 document.getElementById('mvp-media').innerText = `${mediaMvp} ★`;
 
-                // 2. Calcula métricas coletivas do clã
-                document.getElementById('stat-total').innerText = membros.length;
-
-                let totalCv = 0;
+                // Métricas coletivas
+                let totalCv  = 0;
                 let countPro = 0;
 
                 membros.forEach(m => {
@@ -218,50 +214,46 @@
                     if (media >= 5.0) countPro++;
                 });
 
-                const cvMedio = (totalCv / membros.length).toFixed(0);
-                document.getElementById('stat-cv').innerText = `CV ${cvMedio}`;
-                document.getElementById('stat-pro').innerText = countPro;
+                document.getElementById('stat-total').innerText = membros.length;
+                document.getElementById('stat-cv').innerText    = `CV ${(totalCv / membros.length).toFixed(0)}`;
+                document.getElementById('stat-pro').innerText   = countPro;
 
             } catch (error) {
-                console.error('Aviso: Backend local offline ou rota inacessível.', error.message);
+                console.error('Aviso: Backend offline ou inacessível.', error.message);
             }
         }
 
-        // Inicializa no carregamento da página
-        window.addEventListener('DOMContentLoaded', carregarDashboard);
-
-
-        // --- VERSÃO PROXY LOCAL (CORS BYPASS) ---
+        // ============================================================
+        // INSTAGRAM — FEED VIA PROXY LOCAL
+        // ============================================================
         async function carregarInstagram() {
-            try {
-                const urlBehold = 'https://cork-dice-gala.ngrok-free.dev/api/instagram';
+    try {
+        // Chama o Behold diretamente — sem precisar do backend
+        const response = await fetch('https://feeds.behold.so/zfNu73cvSfwyTTz5ynmT');
+        if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
 
-                const response = await fetch(urlBehold);
-                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+        const dadosRecebidos = await response.json();
+        const posts = dadosRecebidos.posts || [];
+        const container = document.getElementById('insta-feed-container');
 
-                const dadosRecebidos = await response.json();
-                console.log("Dados lidos via Proxy Backend:", dadosRecebidos);
+        if (posts.length === 0) {
+            container.innerHTML = `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
+            return;
+        }
 
-                const posts = dadosRecebidos.posts || [];
-                const container = document.getElementById('insta-feed-container');
+        container.innerHTML = '';
 
-                if (!posts || posts.length === 0) {
-                    container.innerHTML = `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil diretamente em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
-                    return;
-                }
+        posts.slice(0, 4).forEach(post => {
+            const urlImagem = post.sizes?.medium?.mediaUrl
+                || post.thumbnailUrl
+                || post.mediaUrl
+                || '';
 
-                container.innerHTML = '';
+            const linkPost     = post.permalink || 'https://instagram.com/clashcitybr';
+            const textoLegenda = post.prunedCaption || post.caption || '';
 
-                posts.slice(0, 4).forEach(post => {
-                    const urlImagem = post.mediaType === 'VIDEO' || post.isReel
-                        ? post.thumbnailUrl
-                        : (post.mediaUrl || post.thumbnailUrl || '');
-
-                    const linkPost = post.permalink || 'https://instagram.com/clashcitybr';
-                    const textoLegenda = post.caption || "Acesse para conferir a publicação completa.";
-
-                    const card = document.createElement('div');
-                    card.style.cssText = `
+            const card = document.createElement('div');
+            card.style.cssText = `
                 background: white;
                 border-radius: 15px;
                 overflow: hidden;
@@ -269,97 +261,77 @@
                 transition: transform 0.3s;
                 cursor: pointer;
             `;
+            card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
+            card.onmouseleave = () => card.style.transform = 'translateY(0)';
+            card.onclick      = () => window.open(linkPost, '_blank');
 
-                    card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
-                    card.onmouseleave = () => card.style.transform = 'translateY(0)';
-                    card.onclick = () => window.open(linkPost, '_blank');
-
-                    card.innerHTML = `
-                <div style="width: 100%; aspect-ratio: 1/1; background: url('${urlImagem}') center/cover no-repeat;"></div>
-                <div style="padding: 15px; text-align: left; color: #11032c;">
-                    <p style="font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; opacity: 0.8;">
+            card.innerHTML = `
+                <div style="width:100%;aspect-ratio:1/1;background:url('${urlImagem}') center/cover no-repeat;"></div>
+                <div style="padding:15px;text-align:left;color:#11032c;">
+                    <p style="font-size:0.85rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;opacity:0.8;">
                         ${textoLegenda}
                     </p>
                 </div>
             `;
-                    container.appendChild(card);
-                });
+            container.appendChild(card);
+        });
 
-            } catch (error) {
-                console.error('Erro ao processar o feed do Instagram:', error.message);
-                document.getElementById('insta-feed-container').innerHTML =
-                    `<p style="color: white; grid-column: 1/-1;">Visite nosso perfil em <a href="https://instagram.com/clashcitybr" target="_blank" style="color: #f9d246; font-weight: bold;">@clashcitybr</a></p>`;
-            }
-        }
-
-        // Animação de Scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.scroll-anim').forEach((el) => observer.observe(el));
-
-        // Esta função centraliza o carregamento das duas APIs de forma segura
-        async function inicializarSite() {
-            console.log("Iniciando carregamento dos dados do clã...");
-
-            // Dispara as duas funções em paralelo
-            await Promise.all([
-                carregarDashboard(),
-                carregarInstagram()
-            ]);
-
-            console.log("Todas as integrações foram processadas!");
-        }
-
-        // Executa a inicialização assim que o navegador terminar de ler o HTML
-        window.addEventListener('DOMContentLoaded', inicializarSite);
-
-        // --- ANIMAÇÃO INTERATIVA 3D COM BRILHO SUTIL ---
+    } catch (error) {
+        console.error('Erro ao carregar Instagram:', error.message);
+        document.getElementById('insta-feed-container').innerHTML =
+            `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
+    }
+}
+        // ============================================================
+        // EFEITO 3D NO EMBLEMA
+        // ============================================================
         function iniciarAnimacaoEmblema() {
             const container = document.querySelector('.about-image');
-            const imagem = document.querySelector('.about-image img');
-
+            const imagem    = document.querySelector('.about-image img');
             if (!container || !imagem) return;
 
             container.addEventListener('mousemove', (e) => {
-                const box = container.getBoundingClientRect();
+                const box    = container.getBoundingClientRect();
+                const centroX = box.left + box.width  / 2;
+                const centroY = box.top  + box.height / 2;
 
-                // Centro do elemento
-                const centroX = box.left + box.width / 2;
-                const centroY = box.top + box.height / 2;
-
-                // Distância do mouse (-1 até 1)
                 const rotX = (centroY - e.clientY) / (box.height / 2);
-                const rotY = (e.clientX - centroX) / (box.width / 2);
+                const rotY = (e.clientX - centroX) / (box.width  / 2);
 
-                const intensidadeInclinacao = 20; // Inclinação confortável
-                const deslocamentoLuz = 15;       // Quantos pixels a luz vai andar
-
-                // Calcula a posição da sombra (invertida)
+                const intensidade     = 20;
+                const deslocamentoLuz = 15;
                 const sombraX = -rotY * deslocamentoLuz;
-                const sombraY = rotX * deslocamentoLuz;
+                const sombraY =  rotX * deslocamentoLuz;
 
-                // Aplica a inclinação 3D
-                imagem.style.transform = `rotateX(${rotX * intensidadeInclinacao}deg) rotateY(${rotY * intensidadeInclinacao}deg) scale(0.98)`;
-
-                // Injeta o brilho direto no contorno do tubarão de forma suave (blur de 15px)
-                imagem.style.filter = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0, 212, 255, 0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
+                imagem.style.transform = `rotateX(${rotX * intensidade}deg) rotateY(${rotY * intensidade}deg) scale(0.98)`;
+                imagem.style.filter    = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0,212,255,0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
             });
 
-            // Reseta tudo ao tirar o mouse
             container.addEventListener('mouseleave', () => {
                 imagem.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-                imagem.style.filter = 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5))';
+                imagem.style.filter    = 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))';
             });
         }
+
+        // ============================================================
+        // SCROLL ANIMATION
+        // ============================================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('show');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
+
+        // ============================================================
+        // FIX 2: Um único DOMContentLoaded inicializa tudo.
+        // Antes havia 3 listeners separados causando chamadas triplas à API.
+        // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
             carregarDashboard();
             carregarInstagram();
-            iniciarAnimacaoEmblema(); // <- Ativa o efeito do tubarão aqui
+            iniciarAnimacaoEmblema();
         });
     </script>
 </body>
