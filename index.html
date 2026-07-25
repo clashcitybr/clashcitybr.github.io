@@ -50,7 +50,8 @@
                     <li>Guerra Frequente</li>
                     <li>Vagas Limitadas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -63,7 +64,8 @@
                     <li>Foco em Evolução</li>
                     <li>Usado para Ligas</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -76,7 +78,8 @@
                     <li>Aberto a Novatos</li>
                     <li>Dicas e Treino</li>
                 </ul>
-                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8" class="btn-join">Solicitar Entrada</a>
+                <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8"
+                    class="btn-join">Solicitar Entrada</a>
             </div>
         </div>
     </section>
@@ -156,7 +159,7 @@
         // MENU HAMBÚRGUER
         // ============================================================
         const hamburger = document.getElementById('hamburger');
-        const navLinks  = document.getElementById('nav-links');
+        const navLinks = document.getElementById('nav-links');
 
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -195,17 +198,29 @@
                 if (!membros || membros.length === 0) return;
 
                 // MVP: primeiro lugar ordenado por totalEstrelas (já vem ordenado do banco)
-                const mvp = membros[0];
-                const mediaMvp = mvp.guerras > 0
-                    ? (mvp.totalEstrelas / mvp.guerras).toFixed(1)
-                    : "0.0";
+                const ordenadoRanking = membros
+                    .map(m => ({
+                        ...m,
+                        mediaE: m.guerras > 0 ? m.totalEstrelas / m.guerras : 0,
+                        mediaP: m.guerras > 0 ? (m.totalDestruicao / m.guerras) / 2 : 0,
+                        cvNum: m.cv
+                    }))
+                    .sort((a, b) => {
+                        if (b.guerras !== a.guerras) return b.guerras - a.guerras;
+                        if (b.mediaE !== a.mediaE) return b.mediaE - a.mediaE;
+                        if (b.mediaP !== a.mediaP) return b.mediaP - a.mediaP;
+                        return b.cvNum - a.cvNum;
+                    });
 
-                document.getElementById('mvp-nome').innerText  = mvp.nome;
-                document.getElementById('mvp-cv').innerText    = `Centro de Vila ${mvp.cv}`;
+                const mvp = ordenadoRanking[0];
+                const mediaMvp = mvp.mediaE.toFixed(1);
+
+                document.getElementById('mvp-nome').innerText = mvp.nome;
+                document.getElementById('mvp-cv').innerText = `Centro de Vila ${mvp.cv}`;
                 document.getElementById('mvp-media').innerText = `${mediaMvp} ★`;
 
                 // Métricas coletivas
-                let totalCv  = 0;
+                let totalCv = 0;
                 let countPro = 0;
 
                 membros.forEach(m => {
@@ -215,8 +230,8 @@
                 });
 
                 document.getElementById('stat-total').innerText = membros.length;
-                document.getElementById('stat-cv').innerText    = `CV ${(totalCv / membros.length).toFixed(0)}`;
-                document.getElementById('stat-pro').innerText   = countPro;
+                document.getElementById('stat-cv').innerText = `CV ${(totalCv / membros.length).toFixed(0)}`;
+                document.getElementById('stat-pro').innerText = countPro;
 
             } catch (error) {
                 console.error('Aviso: Backend offline ou inacessível.', error.message);
@@ -227,33 +242,33 @@
         // INSTAGRAM — FEED VIA PROXY LOCAL
         // ============================================================
         async function carregarInstagram() {
-    try {
-        // Chama o Behold diretamente — sem precisar do backend
-        const response = await fetch('https://feeds.behold.so/zfNu73cvSfwyTTz5ynmT');
-        if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+            try {
+                // Chama o Behold diretamente — sem precisar do backend
+                const response = await fetch('https://feeds.behold.so/zfNu73cvSfwyTTz5ynmT');
+                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
 
-        const dadosRecebidos = await response.json();
-        const posts = dadosRecebidos.posts || [];
-        const container = document.getElementById('insta-feed-container');
+                const dadosRecebidos = await response.json();
+                const posts = dadosRecebidos.posts || [];
+                const container = document.getElementById('insta-feed-container');
 
-        if (posts.length === 0) {
-            container.innerHTML = `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
-            return;
-        }
+                if (posts.length === 0) {
+                    container.innerHTML = `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
+                    return;
+                }
 
-        container.innerHTML = '';
+                container.innerHTML = '';
 
-        posts.slice(0, 4).forEach(post => {
-            const urlImagem = post.sizes?.medium?.mediaUrl
-                || post.thumbnailUrl
-                || post.mediaUrl
-                || '';
+                posts.slice(0, 4).forEach(post => {
+                    const urlImagem = post.sizes?.medium?.mediaUrl
+                        || post.thumbnailUrl
+                        || post.mediaUrl
+                        || '';
 
-            const linkPost     = post.permalink || 'https://instagram.com/clashcitybr';
-            const textoLegenda = post.prunedCaption || post.caption || '';
+                    const linkPost = post.permalink || 'https://instagram.com/clashcitybr';
+                    const textoLegenda = post.prunedCaption || post.caption || '';
 
-            const card = document.createElement('div');
-            card.style.cssText = `
+                    const card = document.createElement('div');
+                    card.style.cssText = `
                 background: white;
                 border-radius: 15px;
                 overflow: hidden;
@@ -261,11 +276,11 @@
                 transition: transform 0.3s;
                 cursor: pointer;
             `;
-            card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
-            card.onmouseleave = () => card.style.transform = 'translateY(0)';
-            card.onclick      = () => window.open(linkPost, '_blank');
+                    card.onmouseenter = () => card.style.transform = 'translateY(-8px)';
+                    card.onmouseleave = () => card.style.transform = 'translateY(0)';
+                    card.onclick = () => window.open(linkPost, '_blank');
 
-            card.innerHTML = `
+                    card.innerHTML = `
                 <div style="width:100%;aspect-ratio:1/1;background:url('${urlImagem}') center/cover no-repeat;"></div>
                 <div style="padding:15px;text-align:left;color:#11032c;">
                     <p style="font-size:0.85rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;opacity:0.8;">
@@ -273,43 +288,43 @@
                     </p>
                 </div>
             `;
-            container.appendChild(card);
-        });
+                    container.appendChild(card);
+                });
 
-    } catch (error) {
-        console.error('Erro ao carregar Instagram:', error.message);
-        document.getElementById('insta-feed-container').innerHTML =
-            `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
-    }
-}
+            } catch (error) {
+                console.error('Erro ao carregar Instagram:', error.message);
+                document.getElementById('insta-feed-container').innerHTML =
+                    `<p style="color:white;grid-column:1/-1;">Visite <a href="https://instagram.com/clashcitybr" target="_blank" style="color:#f9d246;font-weight:bold;">@clashcitybr</a></p>`;
+            }
+        }
         // ============================================================
         // EFEITO 3D NO EMBLEMA
         // ============================================================
         function iniciarAnimacaoEmblema() {
             const container = document.querySelector('.about-image');
-            const imagem    = document.querySelector('.about-image img');
+            const imagem = document.querySelector('.about-image img');
             if (!container || !imagem) return;
 
             container.addEventListener('mousemove', (e) => {
-                const box    = container.getBoundingClientRect();
-                const centroX = box.left + box.width  / 2;
-                const centroY = box.top  + box.height / 2;
+                const box = container.getBoundingClientRect();
+                const centroX = box.left + box.width / 2;
+                const centroY = box.top + box.height / 2;
 
                 const rotX = (centroY - e.clientY) / (box.height / 2);
-                const rotY = (e.clientX - centroX) / (box.width  / 2);
+                const rotY = (e.clientX - centroX) / (box.width / 2);
 
-                const intensidade     = 20;
+                const intensidade = 20;
                 const deslocamentoLuz = 15;
                 const sombraX = -rotY * deslocamentoLuz;
-                const sombraY =  rotX * deslocamentoLuz;
+                const sombraY = rotX * deslocamentoLuz;
 
                 imagem.style.transform = `rotateX(${rotX * intensidade}deg) rotateY(${rotY * intensidade}deg) scale(0.98)`;
-                imagem.style.filter    = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0,212,255,0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
+                imagem.style.filter = `drop-shadow(${sombraX}px ${sombraY}px 15px rgba(0,212,255,0.6)) drop-shadow(0 10px 10px rgba(0,0,0,0.3))`;
             });
 
             container.addEventListener('mouseleave', () => {
                 imagem.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-                imagem.style.filter    = 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))';
+                imagem.style.filter = 'drop-shadow(0 10px 15px rgba(0,0,0,0.5))';
             });
         }
 
