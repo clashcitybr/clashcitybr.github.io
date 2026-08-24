@@ -76,15 +76,22 @@
             cursor: pointer;
             background: none;
             border: none;
+            padding: 0;
+            width: 34px;
+            height: 34px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             z-index: 10000;
         }
 
         .hamburger span {
             display: block;
-            width: 25px;
-            height: 3px;
+            width: 22px;
+            height: 2px;
             background: white;
-            margin: 5px 0;
+            border-radius: 2px;
             transition: 0.4s;
         }
 
@@ -159,36 +166,86 @@
             color: var(--dark);
         }
 
+        /* Escurece o resto da página por trás do menu mobile aberto */
+        .nav-overlay {
+            display: none;
+        }
+
         @media (max-width: 900px) {
             .hamburger {
-                display: block;
+                display: flex;
             }
 
+            .nav-overlay {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.35s ease;
+                z-index: 9998;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* Painel estreito e compacto, não a tela quase inteira */
             .nav-links {
                 position: fixed;
                 right: -100%;
                 top: 0;
-                width: 75%;
+                width: min(78vw, 300px);
                 height: 100vh;
                 background: var(--dark);
+                display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+                justify-content: flex-start;
+                align-items: stretch;
+                transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+                overflow-y: auto;
             }
 
             .nav-links.active {
                 right: 0;
             }
 
+            .nav-links-header {
+                color: var(--primary);
+                font-weight: 800;
+                font-size: 0.85rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 90px 28px 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
             .nav-links a {
-                font-size: 1.2rem;
-                margin: 15px 0;
+                width: 100%;
+                font-size: 0.9rem;
+                margin: 0;
+                padding: 16px 28px;
+                text-align: left;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                transition: background 0.2s, color 0.2s;
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a:hover,
+            .nav-links a:active {
+                background: rgba(249, 210, 70, 0.1);
+                color: var(--primary);
             }
 
             .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 6px);
+                transform: translateY(7px) rotate(45deg);
             }
 
             .hamburger.active span:nth-child(2) {
@@ -196,7 +253,7 @@
             }
 
             .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -6px);
+                transform: translateY(-7px) rotate(-45deg);
             }
         }
 
@@ -224,6 +281,121 @@
             max-width: 700px;
             font-size: 1.2rem;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- NOVO: GUERRA AO VIVO --- */
+        .guerra-section {
+            padding: 30px 5% 0;
+            background: #f0f2f5;
+        }
+
+        .guerra-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guerra-carregando {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        /* Mesma linguagem visual do .mvp-card: gradiente escuro +
+           borda dourada. Todas as variantes de estado compartilham essa
+           base — só a borda e a opacidade mudam pra sinalizar urgência,
+           sem sair da paleta de 4 cores do resto do site. */
+        .guerra-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 25px 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(7, 113, 135, 0.2);
+        }
+
+        .guerra-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* Sem guerra: mesma base, só mais discreta (borda azul-claro do
+           site em vez de dourada, e um pouco de transparência) */
+        .guerra-neutra {
+            border-color: var(--accent);
+            opacity: 0.85;
+        }
+
+        .guerra-neutra .guerra-badge {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Preparação e guerra encerrada usam a borda padrão (dourada);
+           guerra ativa ganha um leve brilho extra por ser o estado
+           mais urgente */
+        .guerra-ativa {
+            box-shadow: 0 15px 40px rgba(249, 210, 70, 0.25);
+        }
+
+        .guerra-encerrada {
+            border-color: var(--secondary);
+        }
+
+        .guerra-placar {
+            font-size: 1.4rem;
+            margin: 10px 0;
+        }
+
+        .guerra-tempo {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .guerra-pendentes-titulo {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+
+        .guerra-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .guerra-chip {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .guerra-chip-ok {
+            background: rgba(249, 210, 70, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media (max-width: 600px) {
+            .guerra-card {
+                padding: 20px;
+            }
+
+            .guerra-placar {
+                font-size: 1.1rem;
+            }
         }
 
         .clans-section {
@@ -299,6 +471,88 @@
         .btn-join:hover {
             background: #077187;
             color: white;
+        }
+
+        /* --- NOVO: HALL DA FAMA (TEMPORADAS ARQUIVADAS) --- */
+        .historico-section {
+            padding: 80px 5%;
+            background: #ffffff;
+        }
+
+        .historico-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .temporada-card {
+            background: var(--glass);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .temporada-card h4 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .podio-lista {
+            list-style: none;
+        }
+
+        .podio-lista li {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 0.95rem;
+        }
+
+        .podio-lista li:last-child {
+            border-bottom: none;
+        }
+
+        .podio-lista .posicao {
+            flex-shrink: 0;
+            font-weight: 800;
+            color: var(--primary);
+            background: var(--dark);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .podio-lista .nome {
+            flex: 1;
+            margin: 0 10px;
+            font-weight: 600;
+            color: var(--dark);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .podio-lista .media {
+            flex-shrink: 0;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .historico-vazio {
+            text-align: center;
+            grid-column: 1 / -1;
+            color: #666;
         }
 
         .video-section {

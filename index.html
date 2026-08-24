@@ -7,7 +7,31 @@
     <link rel="shortcut icon" href="estilos/Imagens/Perfil_COC-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Clash City BR - Família de Clãs</title>
+
+    <meta name="description" content="Família Clash City BR — três clãs ativos desde 2017. União, estratégia e evolução em Clash of Clans. Solicite sua entrada e acompanhe o desempenho de guerra da comunidade.">
+
+    <!-- Open Graph / compartilhamento (WhatsApp, Instagram, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clashcitybr.github.io/">
+    <meta property="og:title" content="Clash City BR - Família de Clãs">
+    <meta property="og:description" content="União, estratégia e evolução desde 2017. Três clãs ativos, guerra frequente e uma comunidade organizada em Clash of Clans.">
+    <meta property="og:image" content="https://clashcitybr.github.io/estilos/Imagens/Clashcity.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clash City BR - Família de Clãs">
+    <meta name="twitter:description" content="União, estratégia e evolução desde 2017. Três clãs ativos, guerra frequente e uma comunidade organizada em Clash of Clans.">
+    <meta name="twitter:image" content="https://clashcitybr.github.io/estilos/Imagens/Clashcity.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- PWA: deixa o site instalável na tela inicial do celular -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#11032c">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Clash City BR">
+
     <script src="config.js"></script>
 </head>
 
@@ -21,16 +45,19 @@
                 <span></span>
             </button>
             <div class="nav-links" id="nav-links">
+                <div class="nav-links-header">Clash City BR</div>
                 <a href="#inicio">Início</a>
                 <a href="https://clashcitybr.github.io/liga/">Liga</a>
                 <a href="#clans">Clãs</a>
                 <a href="https://clashcitybr.github.io/controle-cla/">Desempenho</a>
+                <a href="#historico">Temporadas</a>
                 <a href="#instagram">Vídeos</a>
                 <a href="#sobre">Sobre</a>
                 <a href="#rodape">Contato</a>
             </div>
         </div>
     </nav>
+    <div class="nav-overlay" id="nav-overlay"></div>
 
     <header id="inicio">
         <h1 class="scroll-anim">Família Clash City BR</h1>
@@ -38,11 +65,17 @@
             topo conosco!</p>
     </header>
 
+    <section id="guerra-ao-vivo" class="guerra-section">
+        <div class="guerra-container scroll-anim" id="guerra-container">
+            <p class="guerra-carregando">Verificando status da guerra...</p>
+        </div>
+    </section>
+
     <section id="clans" class="clans-section">
         <h2 style="text-align:center; font-size: 2.5rem;" class="scroll-anim">Nossos Clãs</h2>
         <div class="clans-container">
             <div class="clan-card scroll-anim">
-                <img src="estilos/Imagens/Clashcity.png" alt="Clash City BR">
+                <img src="estilos/Imagens/Clashcity.png" alt="Clash City BR" loading="lazy">
                 <h3>CLASH CITY BR</h3>
                 <p><strong>Clã Principal</strong></p>
                 <ul>
@@ -56,7 +89,7 @@
             </div>
 
             <div class="clan-card scroll-anim">
-                <img src="estilos/Imagens/clashcitybr2.png" alt="Clash City BR 2">
+                <img src="estilos/Imagens/clashcitybr2.png" alt="Clash City BR 2" loading="lazy">
                 <h3>CLASH CITY BR 2</h3>
                 <p><strong>Secundário</strong></p>
                 <ul>
@@ -70,7 +103,7 @@
             </div>
 
             <div class="clan-card scroll-anim">
-                <img src="estilos/Imagens/clashcitybr3.png" alt="Clash City BR 3">
+                <img src="estilos/Imagens/clashcitybr3.png" alt="Clash City BR 3" loading="lazy">
                 <h3>CLASH CITY BR 3</h3>
                 <p><strong>Terciário</strong></p>
                 <ul>
@@ -114,6 +147,16 @@
         </div>
     </section>
 
+    <section id="historico" class="historico-section">
+        <h2 class="scroll-anim" style="text-align:center; font-size: 2.5rem;">Hall da Fama</h2>
+        <p class="scroll-anim" style="text-align:center; max-width:700px; margin: 0 auto 40px; opacity:0.75;">
+            O pódio de cada temporada encerrada.
+        </p>
+        <div class="historico-container" id="historico-container">
+            <p class="historico-vazio">Carregando temporadas...</p>
+        </div>
+    </section>
+
     <!-- FIX 3: tag </section> duplicada removida -->
     <section id="instagram" class="video-section"
         style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); padding: 80px 5%;">
@@ -136,23 +179,23 @@
                 Nettim, xFrozen, J.Couto e outros veteranos.</p>
         </div>
         <div class="about-image scroll-anim">
-            <img src="estilos/Imagens/Perfil_COC-removebg-preview.png" alt="Logo Clash City">
+            <img src="estilos/Imagens/Perfil_COC-removebg-preview.png" alt="Logo Clash City" loading="lazy">
         </div>
     </section>
 
     <footer id="rodape">
         <div class="social-links">
             <a href="https://wa.me/31995312787" target="_blank">
-                <img src="estilos/Imagens/whatsapp.png" alt="WhatsApp">
+                <img src="estilos/Imagens/whatsapp.png" alt="WhatsApp" loading="lazy">
             </a>
             <a href="https://www.instagram.com/clashcitybr/" target="_blank">
-                <img src="estilos/Imagens/Instagram_icon.png" alt="Instagram">
+                <img src="estilos/Imagens/Instagram_icon.png" alt="Instagram" loading="lazy">
             </a>
             <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" loading="lazy">
             </a>
         </div>
-        <p>© 2026 Clash City BR - Todos os direitos reservados.</p>
+        <p>© <span id="ano-atual">2026</span> Clash City BR - Todos os direitos reservados.</p>
     </footer>
 
     <script>
@@ -161,28 +204,127 @@
         // ============================================================
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+
+        function fecharMenu() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+        }
 
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
         });
 
         document.addEventListener('click', (e) => {
             if (navLinks.classList.contains('active')) {
                 if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
+                    fecharMenu();
                 }
             }
         });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', fecharMenu);
         });
+
+        // ============================================================
+        // GUERRA AO VIVO
+        // ============================================================
+        function parseDataCoC(str) {
+            // Formato da Supercell: yyyyMMddTHHmmss.000Z
+            if (!str) return null;
+            const y = str.slice(0, 4), mo = str.slice(4, 6), d = str.slice(6, 8);
+            const h = str.slice(9, 11), mi = str.slice(11, 13), s = str.slice(13, 15);
+            return new Date(`${y}-${mo}-${d}T${h}:${mi}:${s}Z`);
+        }
+
+        function formatarTempoRestante(dataFim) {
+            const diffMs = dataFim - new Date();
+            if (diffMs <= 0) return "encerrando...";
+            const horas = Math.floor(diffMs / (1000 * 60 * 60));
+            const minutos = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            return `${horas}h ${minutos}min`;
+        }
+
+        async function carregarGuerraAoVivo() {
+            const container = document.getElementById('guerra-container');
+            try {
+                const response = await fetch(`${API_URL}/guerra-atual`, {
+                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                });
+                if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
+
+                const guerra = await response.json();
+
+                if (guerra.state === 'notInWar') {
+                    container.innerHTML = `
+                        <div class="guerra-card guerra-neutra">
+                            <span class="guerra-badge">😴 SEM GUERRA</span>
+                            <p>Nenhuma guerra em andamento no momento.</p>
+                        </div>`;
+                    return;
+                }
+
+                if (guerra.state === 'preparation') {
+                    const inicio = parseDataCoC(guerra.startTime);
+                    container.innerHTML = `
+                        <div class="guerra-card guerra-preparacao">
+                            <span class="guerra-badge">⏳ PREPARAÇÃO</span>
+                            <p>Guerra contra <strong>${guerra.opponent?.name || 'adversário'}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
+                        </div>`;
+                    return;
+                }
+
+                if (guerra.state === 'inWar') {
+                    const fim = parseDataCoC(guerra.endTime);
+                    const pendentes = guerra.membrosPendentes || [];
+                    const chipsHtml = pendentes.length > 0
+                        ? pendentes.map(m => `<span class="guerra-chip">${m.nome} (${m.ataquesFeitos}/${guerra.attacksPerMember})</span>`).join('')
+                        : '<span class="guerra-chip guerra-chip-ok">Todo mundo já atacou! 🎉</span>';
+
+                    container.innerHTML = `
+                        <div class="guerra-card guerra-ativa">
+                            <span class="guerra-badge">⚔️ GUERRA EM ANDAMENTO</span>
+                            <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${guerra.clan?.stars ?? 0}★</strong>
+                                &nbsp;vs&nbsp;
+                                <strong>${guerra.opponent?.stars ?? 0}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
+                            <p class="guerra-tempo">Faltam ${formatarTempoRestante(fim)} para o fim</p>
+                            <div class="guerra-pendentes">
+                                <p class="guerra-pendentes-titulo">${pendentes.length > 0 ? `${pendentes.length} membro(s) ainda não atacaram:` : ''}</p>
+                                <div class="guerra-chips">${chipsHtml}</div>
+                            </div>
+                        </div>`;
+                    return;
+                }
+
+                if (guerra.state === 'warEnded') {
+                    const nossasEstrelas = guerra.clan?.stars ?? 0;
+                    const estrelasAdversario = guerra.opponent?.stars ?? 0;
+                    let resultado = 'EMPATE';
+                    if (nossasEstrelas > estrelasAdversario) resultado = 'VITÓRIA';
+                    else if (nossasEstrelas < estrelasAdversario) resultado = 'DERROTA';
+
+                    container.innerHTML = `
+                        <div class="guerra-card guerra-encerrada">
+                            <span class="guerra-badge">🏁 GUERRA ENCERRADA — ${resultado}</span>
+                            <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${nossasEstrelas}★</strong>
+                                &nbsp;vs&nbsp;
+                                <strong>${estrelasAdversario}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
+                        </div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+            } catch (error) {
+                console.error('Aviso: guerra ao vivo indisponível.', error.message);
+                container.innerHTML = '';
+            }
+        }
 
         // ============================================================
         // DASHBOARD — DADOS DO BANCO
@@ -237,6 +379,68 @@
 
             } catch (error) {
                 console.error('Aviso: Backend offline ou inacessível.', error.message);
+                // Antes ficava travado em "Carregando..." pra sempre quando o
+                // backend estava fora do ar. Agora avisa o visitante.
+                document.getElementById('mvp-nome').innerText = 'Indisponível no momento';
+                document.getElementById('mvp-cv').innerText = '';
+                document.getElementById('mvp-media').innerText = '—';
+                document.getElementById('stat-total').innerText = '—';
+                document.getElementById('stat-pro').innerText = '—';
+                document.getElementById('stat-cv').innerText = '—';
+            }
+        }
+
+        // ============================================================
+        // HALL DA FAMA — TEMPORADAS ARQUIVADAS
+        // ============================================================
+        async function carregarHistorico() {
+            const container = document.getElementById('historico-container');
+            try {
+                const response = await fetch(`${API_URL}/historico`, {
+                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                });
+                if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
+
+                const temporadas = await response.json();
+
+                if (!temporadas || temporadas.length === 0) {
+                    container.innerHTML = '<p class="historico-vazio">Nenhuma temporada arquivada ainda.</p>';
+                    return;
+                }
+
+                const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+                container.innerHTML = '';
+
+                temporadas.slice(0, 6).forEach(temporada => {
+                    const [ano, mesNum] = temporada.mes.split('-');
+                    const nomeMes = nomesMeses[parseInt(mesNum, 10) - 1] || mesNum;
+                    const top3 = (temporada.snapshot || []).slice(0, 3);
+
+                    const podioHtml = top3.length > 0
+                        ? top3.map(jogador => `
+                            <li>
+                                <span class="posicao">#${jogador.posicao}</span>
+                                <span class="nome">${jogador.nome}</span>
+                                <span class="media">${(jogador.mediaEstrelas ?? 0).toFixed(1)} ★</span>
+                            </li>`).join('')
+                        : '<li>Sem dados registrados</li>';
+
+                    const card = document.createElement('div');
+                    card.className = 'temporada-card scroll-anim';
+                    card.innerHTML = `
+                        <h4>${nomeMes} ${ano}</h4>
+                        <ul class="podio-lista">${podioHtml}</ul>
+                    `;
+                    container.appendChild(card);
+                });
+
+                document.querySelectorAll('.temporada-card').forEach(el => observer.observe(el));
+
+            } catch (error) {
+                console.error('Aviso: histórico indisponível.', error.message);
+                container.innerHTML = '<p class="historico-vazio">Histórico indisponível no momento.</p>';
             }
         }
 
@@ -346,10 +550,29 @@
         // Antes havia 3 listeners separados causando chamadas triplas à API.
         // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
+            const anoEl = document.getElementById('ano-atual');
+            if (anoEl) anoEl.innerText = new Date().getFullYear();
+
+            carregarGuerraAoVivo();
             carregarDashboard();
+            carregarHistorico();
             carregarInstagram();
             iniciarAnimacaoEmblema();
+
+            // Atualiza o status da guerra a cada 5 minutos, sem precisar
+            // recarregar a página — pra sentir "ao vivo" de verdade.
+            setInterval(carregarGuerraAoVivo, 5 * 60 * 1000);
         });
+
+        // ============================================================
+        // PWA: registra o service worker (deixa o site instalável)
+        // ============================================================
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.error('Erro ao registrar o service worker:', err));
+            });
+        }
     </script>
 </body>
 
