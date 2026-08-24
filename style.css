@@ -286,6 +286,7 @@
         /* --- NOVO: GUERRA AO VIVO --- */
         .guerra-section {
             padding: 30px 5% 0;
+            padding-bottom: 15px;
             background: #f0f2f5;
         }
 
