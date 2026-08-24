@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Clash City BR - Família de Clãs</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="config.js"></script>
 </head>
 
 <body>
@@ -188,8 +189,9 @@
         // ============================================================
         async function carregarDashboard() {
             try {
-                const API_URL = "https://cork-dice-gala.ngrok-free.dev/membros";
-                const response = await fetch(API_URL, {
+                // API_URL vem de config.js — troque lá, não aqui, quando
+                // migrar o backend pra VPS.
+                const response = await fetch(`${API_URL}/membros`, {
                     headers: { 'ngrok-skip-browser-warning': 'true' }
                 });
                 if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
