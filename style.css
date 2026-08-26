@@ -1,4 +1,4 @@
- :root {
+:root {
             --primary: #f9d246;
             --secondary: #077187;
             --dark: #11032c;
@@ -89,6 +89,35 @@
             height: 2px;
             background: var(--primary);
             border-radius: 2px;
+        }
+
+        /* Separa visualmente os links que saem da home (Liga,
+           Desempenho) dos que só rolam a própria página — pra ficar
+           claro de cara que eles levam pra outro lugar. */
+        .nav-divider {
+            width: 1px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.25);
+            display: inline-block;
+        }
+
+        .nav-group-label {
+            display: none;
+        }
+
+        .nav-links a.nav-external {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .nav-links a.nav-external:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a.nav-external::after {
+            content: '↗';
+            font-size: 0.75em;
+            margin-left: 3px;
+            font-weight: 700;
         }
 
         @media (max-width: 900px) {
@@ -293,6 +322,30 @@
                 color: var(--primary);
             }
 
+            /* No painel mobile o divisor vira uma linha horizontal com
+               um rótulo em cima, marcando o grupo "Outras páginas". */
+            .nav-divider {
+                width: auto;
+                height: 1px;
+                margin: 4px 28px 0;
+                background: rgba(255, 255, 255, 0.12);
+            }
+
+            .nav-group-label {
+                display: block;
+                padding: 14px 28px 4px;
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.45);
+            }
+
+            .nav-links a.nav-external:hover,
+            .nav-links a.nav-external:active {
+                background: rgba(106, 165, 237, 0.12);
+                color: var(--accent);
+            }
+
             .hamburger.active span:nth-child(1) {
                 transform: translateY(7px) rotate(45deg);
             }
@@ -335,12 +388,12 @@
         /* --- NOVO: GUERRA AO VIVO --- */
         .guerra-section {
             padding: 30px 5% 0;
-            padding-bottom: 15px;
             background: #f0f2f5;
         }
 
         .guerra-container {
             max-width: 900px;
+            padding-bottom: 15px;
             margin: 0 auto;
         }
 
