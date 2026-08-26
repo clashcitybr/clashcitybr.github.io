@@ -1,0 +1,356 @@
+/* ============================================================
+   CLASH CITY BR — DESIGN SYSTEM
+   ------------------------------------------------------------
+   Fonte única de verdade pra cores, tipografia, espaçamento,
+   sombras, glow e componentes base (botão, badge, card, toast,
+   skeleton) compartilhados entre as 3 propriedades do site:
+   frontend/, controle-cla/ e a liga (repo separado).
+
+   Como usar: carregar este arquivo ANTES do style.css de cada
+   página. As variáveis antigas (--primary, --secondary, --dark,
+   --light, --accent) continuam existindo com os MESMOS valores
+   de sempre — nada que já usa var(--primary) etc. quebra. Este
+   arquivo só ADICIONA tokens novos e componentes novos por cima.
+
+   Direção visual: 70% produto moderno / 30% identidade Clash of
+   Clans — ouro, roxo mágico, verde de estandarte e fogo aparecem
+   como ACENTOS pontuais (badges, glow, bordas), nunca como
+   textura de fundo em todo lugar.
+   ============================================================ */
+
+:root {
+    /* --- Paleta base (já usada em todo o site — valores mantidos) --- */
+    --primary: #f9d246;
+    /* ouro */
+    --secondary: #077187;
+    /* teal/petróleo */
+    --dark: #11032c;
+    /* navy profundo */
+    --light: #ffffff;
+    --accent: #6aa5ed;
+    /* azul */
+    --glass: rgba(255, 255, 255, 0.92);
+
+    /* --- Paleta estendida (identidade premium, uso pontual) --- */
+    --color-purple: #7c3aed;
+    /* roxo mágico */
+    --color-purple-deep: #2d0f5e;
+    --color-green: #16a34a;
+    /* verde de estandarte */
+    --color-green-deep: #15803d;
+    --color-fire: #f97316;
+    /* fogo/laranja */
+
+    /* --- Semântica de status (guerra, ranking, sincronização) --- */
+    --color-success: #22c55e;
+    --color-success-deep: #15803d;
+    --color-danger: #ef4444;
+    --color-danger-deep: #991b1b;
+    --color-warning: var(--primary);
+    --color-info: var(--accent);
+
+    /* --- Superfícies e texto --- */
+    --color-bg: #f0f2f5;
+    --color-surface: #ffffff;
+    --color-surface-dark: var(--dark);
+    --color-text: var(--dark);
+    --color-text-muted: #666e7d;
+    --color-text-inverse: #ffffff;
+    --color-border: rgba(17, 3, 44, 0.08);
+    --color-border-dark: rgba(255, 255, 255, 0.14);
+
+    /* --- Tipografia --- */
+    --font-base: 'Lexend', sans-serif;
+    --text-xs: 0.72rem;
+    --text-sm: 0.85rem;
+    --text-base: 1rem;
+    --text-lg: 1.15rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 2.5rem;
+    --text-4xl: clamp(2.5rem, 8vw, 4.5rem);
+    --weight-medium: 600;
+    --weight-bold: 800;
+
+    /* --- Espaçamento --- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* --- Raios --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 999px;
+
+    /* --- Sombras --- */
+    --shadow-sm: 0 2px 8px rgba(17, 3, 44, 0.07);
+    --shadow-md: 0 8px 24px rgba(17, 3, 44, 0.10);
+    --shadow-lg: 0 16px 40px rgba(17, 3, 44, 0.16);
+
+    /* --- Glow (uso controlado — só em elementos de destaque real) --- */
+    --glow-gold: 0 0 0 1px rgba(249, 210, 70, 0.45), 0 8px 28px rgba(249, 210, 70, 0.25);
+    --glow-purple: 0 0 0 1px rgba(124, 58, 237, 0.45), 0 8px 28px rgba(124, 58, 237, 0.25);
+    --glow-success: 0 0 0 1px rgba(34, 197, 94, 0.45), 0 8px 24px rgba(34, 197, 94, 0.22);
+    --glow-danger: 0 0 0 1px rgba(239, 68, 68, 0.45), 0 8px 24px rgba(239, 68, 68, 0.22);
+
+    /* --- Transições padrão --- */
+    --ease-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ============================================================
+   ACESSIBILIDADE — foco visível em qualquer elemento navegável
+   por teclado. Nunca remover outline sem substituir por algo
+   igualmente visível.
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-base);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-sm);
+    letter-spacing: 0.02em;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--ease-fast), box-shadow var(--ease-fast), background var(--ease-fast);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: #ffdf6e;
+    box-shadow: var(--glow-gold);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+    color: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--dark);
+    border: 2px solid var(--color-border);
+}
+
+.btn-ghost:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.btn-external::after {
+    content: '↗';
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+/* ============================================================
+   BADGES — status, tags, indicadores curtos
+   ============================================================ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.03em;
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.badge-gold {
+    background: var(--primary);
+    color: var(--dark);
+}
+
+.badge-success {
+    background: rgba(34, 197, 94, 0.16);
+    color: var(--color-success-deep);
+}
+
+.badge-danger {
+    background: rgba(239, 68, 68, 0.14);
+    color: var(--color-danger-deep);
+}
+
+.badge-purple {
+    background: rgba(124, 58, 237, 0.14);
+    color: var(--color-purple);
+}
+
+.badge-neutral {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border: 1px solid var(--color-border-dark);
+}
+
+.badge-outline {
+    background: transparent;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text-muted);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.cc-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--ease-base), box-shadow var(--ease-base);
+}
+
+.cc-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.cc-card-dark {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--color-purple-deep) 100%);
+    color: #fff;
+}
+
+/* ============================================================
+   SKELETON LOADING — evita tela "congelada" enquanto busca dados
+   ============================================================ */
+@keyframes cc-shimmer {
+    0% {
+        background-position: -300px 0;
+    }
+
+    100% {
+        background-position: 300px 0;
+    }
+}
+
+.skeleton {
+    display: inline-block;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(90deg, rgba(17, 3, 44, 0.06) 25%, rgba(17, 3, 44, 0.12) 37%, rgba(17, 3, 44, 0.06) 63%);
+    background-size: 600px 100%;
+    animation: cc-shimmer 1.4s ease infinite;
+    color: transparent !important;
+}
+
+.skeleton-dark {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.16) 37%, rgba(255, 255, 255, 0.08) 63%);
+    background-size: 600px 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+        background: rgba(17, 3, 44, 0.08);
+    }
+}
+
+/* ============================================================
+   TOAST — feedback discreto após uma ação/atualização
+   ("Dados sincronizados ✓", "Convocação salva ✓"...)
+   ============================================================ */
+#cc-toast-container {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.cc-toast {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    padding: 12px 20px;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity var(--ease-base), transform var(--ease-base);
+}
+
+.cc-toast.cc-toast-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cc-toast-success {
+    border-color: rgba(34, 197, 94, 0.4);
+}
+
+.cc-toast-error {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cc-toast {
+        transition: opacity 120ms linear;
+        transform: none;
+    }
+}

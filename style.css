@@ -67,8 +67,37 @@
             transition: color 0.3s;
         }
 
+        .nav-links a {
+            position: relative;
+        }
+
         .nav-links a:hover {
             color: var(--primary);
+        }
+
+        /* Indica em qual seção da página o visitante está (scroll-spy) */
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -8px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links a.active::after {
+                bottom: 6px;
+                left: 28px;
+                right: auto;
+                width: 20px;
+            }
         }
 
         .hamburger {
@@ -151,6 +180,18 @@
             text-align: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform var(--ease-base, 0.2s), box-shadow var(--ease-base, 0.2s);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(17, 3, 44, 0.10);
+        }
+
+        .stat-box-icone {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 6px;
         }
 
         .stat-box h4 {
@@ -164,6 +205,14 @@
             font-size: 2rem;
             font-weight: 800;
             color: var(--dark);
+        }
+
+        .mvp-card {
+            transition: box-shadow var(--ease-base, 0.2s);
+        }
+
+        .mvp-card:hover {
+            box-shadow: var(--glow-gold, 0 15px 35px rgba(7, 113, 135, 0.2));
         }
 
         /* Escurece o resto da página por trás do menu mobile aberto */
@@ -350,6 +399,64 @@
             border-color: var(--secondary);
         }
 
+        /* Resultado da guerra encerrada — cor conta a história em <1s,
+           sem precisar ler o placar. */
+        .guerra-vitoria {
+            border-color: var(--color-success);
+            box-shadow: var(--glow-success);
+        }
+
+        .guerra-vitoria .guerra-badge {
+            background: var(--color-success);
+            color: #fff;
+        }
+
+        .guerra-derrota {
+            border-color: var(--color-danger);
+        }
+
+        .guerra-derrota .guerra-badge {
+            background: var(--color-danger);
+            color: #fff;
+        }
+
+        .guerra-empate {
+            border-color: var(--accent);
+        }
+
+        .guerra-empate .guerra-badge {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .guerra-erro {
+            border-color: var(--color-danger);
+            opacity: 0.9;
+        }
+
+        .guerra-erro .guerra-badge {
+            background: var(--color-danger);
+            color: #fff;
+        }
+
+        .guerra-erro p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .guerra-skeleton {
+            border-color: var(--color-border-dark, rgba(255,255,255,0.14));
+        }
+
+        /* Faixa de identidade abaixo do hero (3 Clãs · Desde 2017 · Guerra Frequente) */
+        .hero-identidade {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
         .guerra-placar {
             font-size: 1.4rem;
             margin: 10px 0;
@@ -428,6 +535,26 @@
             border-color: var(--primary);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transform: translateY(-12px) scale(1.02);
+        }
+
+        /* Faixa fina no topo de cada card — diferencia os 3 clãs à
+           primeira vista, sem virar textura pesada */
+        .clan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary);
+        }
+
+        .clan-card:nth-child(2)::before {
+            background: var(--secondary);
+        }
+
+        .clan-card:nth-child(3)::before {
+            background: var(--accent);
         }
 
         .clan-card img {

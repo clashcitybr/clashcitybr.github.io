@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="estilos/Imagens/Perfil_COC-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="design-system.css">
     <link rel="stylesheet" href="style.css">
     <title>Clash City BR - Família de Clãs</title>
 
     <meta name="description" content="Família Clash City BR — três clãs ativos desde 2017. União, estratégia e evolução em Clash of Clans. Solicite sua entrada e acompanhe o desempenho de guerra da comunidade.">
+
+    <!-- Canonical: diz ao Google qual é o endereço "oficial" desta página,
+         evitando que ele veja a versão com e sem barra no final como duplicadas -->
+    <link rel="canonical" href="https://clashcitybr.github.io/">
 
     <!-- Open Graph / compartilhamento (WhatsApp, Instagram, etc.) -->
     <meta property="og:type" content="website">
@@ -22,17 +27,44 @@
     <meta name="twitter:description" content="União, estratégia e evolução desde 2017. Três clãs ativos, guerra frequente e uma comunidade organizada em Clash of Clans.">
     <meta name="twitter:image" content="https://clashcitybr.github.io/estilos/Imagens/Clashcity.png">
 
+    <!-- Preconnect: o navegador já abre a conexão com o Google Fonts antes de
+         precisar baixar o CSS da fonte, evitando atraso/"flash" de fonte errada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <!-- PWA: deixa o site instalável na tela inicial do celular -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#11032c">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Tag padrão (Chrome/Android pedem essa; a apple- de baixo é só
+         reconhecida pelo Safari/iOS — mantemos as duas) -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Clash City BR">
 
     <script src="config.js"></script>
+    <script src="design-system.js" defer></script>
+
+    <!-- Dados estruturados: ajuda o Google a entender que "Clash City BR" é o
+         nome de uma organização/comunidade, não só texto solto na página —
+         aumenta a chance de aparecer certo quando alguém pesquisa o nome -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Clash City BR",
+        "alternateName": "Família Clash City BR",
+        "url": "https://clashcitybr.github.io/",
+        "logo": "https://clashcitybr.github.io/estilos/Imagens/Clashcity.png",
+        "description": "Família de clãs de Clash of Clans ativa desde 2017, com três clãs, guerra frequente e acompanhamento de desempenho da comunidade.",
+        "sameAs": [
+            "https://www.instagram.com/clashcitybr/",
+            "https://www.youtube.com/@clashcitybr/videos"
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -63,11 +95,19 @@
         <h1 class="scroll-anim">Família Clash City BR</h1>
         <p class="scroll-anim">União, estratégia e evolução desde 2017. Junte-se a uma comunidade ativa e conquiste o
             topo conosco!</p>
+        <div class="hero-identidade scroll-anim">
+            <span class="badge badge-neutral">🏰 3 Clãs Ativos</span>
+            <span class="badge badge-neutral">📅 Desde 2017</span>
+            <span class="badge badge-gold">⚔️ Guerra Frequente</span>
+        </div>
     </header>
 
     <section id="guerra-ao-vivo" class="guerra-section">
         <div class="guerra-container scroll-anim" id="guerra-container">
-            <p class="guerra-carregando">Verificando status da guerra...</p>
+            <div class="guerra-card guerra-skeleton" aria-hidden="true">
+                <span class="skeleton skeleton-dark" style="width:160px;height:22px;border-radius:20px;margin:0 auto 14px;display:block;">&nbsp;</span>
+                <span class="skeleton skeleton-dark" style="width:70%;height:18px;margin:0 auto;display:block;">&nbsp;</span>
+            </div>
         </div>
     </section>
 
@@ -85,7 +125,7 @@
                     <li>Vagas Limitadas</li>
                 </ul>
                 <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2"
-                    class="btn-join">Solicitar Entrada</a>
+                    class="btn-join btn-external">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -99,7 +139,7 @@
                     <li>Usado para Ligas</li>
                 </ul>
                 <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2LQY9RYV0"
-                    class="btn-join">Solicitar Entrada</a>
+                    class="btn-join btn-external">Solicitar Entrada</a>
             </div>
 
             <div class="clan-card scroll-anim">
@@ -113,7 +153,7 @@
                     <li>Dicas e Treino</li>
                 </ul>
                 <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=2JY8QGQC8"
-                    class="btn-join">Solicitar Entrada</a>
+                    class="btn-join btn-external">Solicitar Entrada</a>
             </div>
         </div>
     </section>
@@ -122,26 +162,29 @@
         <div class="dash-grid">
             <div class="mvp-card scroll-anim" id="mvp-container">
                 <span class="mvp-badge">👑 MVP DA TEMPORADA</span>
-                <h3 id="mvp-nome" style="font-size: 2rem; margin-bottom: 5px;">Carregando...</h3>
-                <p id="mvp-cv" style="color: var(--primary); font-weight: 600; margin-bottom: 15px;">CV --</p>
+                <h3 id="mvp-nome" class="skeleton" style="font-size: 2rem; margin-bottom: 5px;">Carregando nome do MVP</h3>
+                <p id="mvp-cv" class="skeleton" style="color: var(--primary); font-weight: 600; margin-bottom: 15px;">CV --</p>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
                     <p style="font-size: 0.9rem; opacity: 0.8;">Média de Eficiência</p>
-                    <h4 id="mvp-media" style="font-size: 1.8rem; color: var(--primary);">0.0 ★</h4>
+                    <h4 id="mvp-media" class="skeleton skeleton-dark" style="font-size: 1.8rem; color: var(--primary);">0.0 ★</h4>
                 </div>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-box scroll-anim">
+                    <span class="stat-box-icone">👥</span>
                     <h4>Membros Rastreados</h4>
-                    <p class="number" id="stat-total">0</p>
+                    <p class="number skeleton" id="stat-total">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
+                    <span class="stat-box-icone">⭐</span>
                     <h4>Atacantes PRO</h4>
-                    <p class="number" id="stat-pro" style="color: #2ec4b6;">0</p>
+                    <p class="number skeleton" id="stat-pro" style="color: #2ec4b6;">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
+                    <span class="stat-box-icone">🏰</span>
                     <h4>Centro de Vila Médio</h4>
-                    <p class="number" id="stat-cv">--</p>
+                    <p class="number skeleton" id="stat-cv">--</p>
                 </div>
             </div>
         </div>
@@ -175,8 +218,8 @@
             <p>O Clash City BR é um clã consolidado, presente no jogo desde 24 de janeiro de 2017. Mantemos uma base
                 sólida formada por jogadores experientes e dedicados.</p>
             <p>Contamos com grupo organizado no WhatsApp para alinhamento de ataques e estratégias.</p>
-            <p><strong>Destaques do Clã:</strong> Shuya Goenji, Zaga-0, Dking Bacon, Kyros, Victor Hugo,
-                Nettim, xFrozen, Igor, Rayleigh e outros veteranos.</p>
+            <p><strong>Destaques do Clã:</strong> Carlos Daniel, Zaga-0, Dking Bacon, Kyros, Souza, Victor Hugo, Weller,
+                Nettim, xFrozen, J.Couto e outros veteranos.</p>
         </div>
         <div class="about-image scroll-anim">
             <img src="estilos/Imagens/Perfil_COC-removebg-preview.png" alt="Logo Clash City" loading="lazy">
@@ -192,7 +235,7 @@
                 <img src="estilos/Imagens/Instagram_icon.png" alt="Instagram" loading="lazy">
             </a>
             <a href="https://www.youtube.com/@clashcitybr/videos" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" loading="lazy">
+                <img src="estilos/Imagens/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.webp" alt="YouTube" loading="lazy">
             </a>
         </div>
         <p>© <span id="ano-atual">2026</span> Clash City BR - Todos os direitos reservados.</p>
@@ -250,6 +293,8 @@
             return `${horas}h ${minutos}min`;
         }
 
+        let guerraJaCarregouUmaVez = false;
+
         async function carregarGuerraAoVivo() {
             const container = document.getElementById('guerra-container');
             try {
@@ -259,6 +304,13 @@
                 if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
 
                 const guerra = await response.json();
+
+                // Só avisa com toast nas atualizações em segundo plano
+                // (a cada 5min) — na primeira carga da página não faz sentido.
+                if (guerraJaCarregouUmaVez && typeof ccToast === 'function') {
+                    ccToast('Status da guerra atualizado');
+                }
+                guerraJaCarregouUmaVez = true;
 
                 if (guerra.state === 'notInWar') {
                     container.innerHTML = `
@@ -305,12 +357,17 @@
                     const nossasEstrelas = guerra.clan?.stars ?? 0;
                     const estrelasAdversario = guerra.opponent?.stars ?? 0;
                     let resultado = 'EMPATE';
-                    if (nossasEstrelas > estrelasAdversario) resultado = 'VITÓRIA';
-                    else if (nossasEstrelas < estrelasAdversario) resultado = 'DERROTA';
+                    let classeResultado = 'guerra-empate';
+                    let icone = '🤝';
+                    if (nossasEstrelas > estrelasAdversario) {
+                        resultado = 'VITÓRIA'; classeResultado = 'guerra-vitoria'; icone = '🏆';
+                    } else if (nossasEstrelas < estrelasAdversario) {
+                        resultado = 'DERROTA'; classeResultado = 'guerra-derrota'; icone = '💀';
+                    }
 
                     container.innerHTML = `
-                        <div class="guerra-card guerra-encerrada">
-                            <span class="guerra-badge">🏁 GUERRA ENCERRADA — ${resultado}</span>
+                        <div class="guerra-card guerra-encerrada ${classeResultado}">
+                            <span class="guerra-badge">${icone} GUERRA ENCERRADA — ${resultado}</span>
                             <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${nossasEstrelas}★</strong>
                                 &nbsp;vs&nbsp;
                                 <strong>${estrelasAdversario}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
@@ -322,7 +379,11 @@
 
             } catch (error) {
                 console.error('Aviso: guerra ao vivo indisponível.', error.message);
-                container.innerHTML = '';
+                container.innerHTML = `
+                    <div class="guerra-card guerra-erro">
+                        <span class="guerra-badge">⚠️ INDISPONÍVEL</span>
+                        <p>Não foi possível carregar o status da guerra agora. Tenta recarregar a página em instantes.</p>
+                    </div>`;
             }
         }
 
@@ -377,6 +438,10 @@
                 document.getElementById('stat-cv').innerText = `CV ${(totalCv / membros.length).toFixed(0)}`;
                 document.getElementById('stat-pro').innerText = countPro;
 
+                // Dados chegaram — tira o efeito de "carregando" (shimmer)
+                ['mvp-nome', 'mvp-cv', 'mvp-media', 'stat-total', 'stat-pro', 'stat-cv']
+                    .forEach(id => document.getElementById(id).classList.remove('skeleton', 'skeleton-dark'));
+
             } catch (error) {
                 console.error('Aviso: Backend offline ou inacessível.', error.message);
                 // Antes ficava travado em "Carregando..." pra sempre quando o
@@ -387,6 +452,9 @@
                 document.getElementById('stat-total').innerText = '—';
                 document.getElementById('stat-pro').innerText = '—';
                 document.getElementById('stat-cv').innerText = '—';
+
+                ['mvp-nome', 'mvp-cv', 'mvp-media', 'stat-total', 'stat-pro', 'stat-cv']
+                    .forEach(id => document.getElementById(id).classList.remove('skeleton', 'skeleton-dark'));
             }
         }
 
@@ -544,6 +612,76 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
+
+        // ============================================================
+        // SCROLL-SPY DO MENU — marca qual seção está ativa enquanto
+        // rola a página, só pros links internos (#âncora). Liga e
+        // Desempenho continuam sem estado ativo por serem outro site.
+        // ============================================================
+        const linksInternos = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+        const secoesComLink = linksInternos
+            .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+            .filter(Boolean);
+
+        function marcarLinkAtivo(idSecao) {
+            linksInternos.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === `#${idSecao}`);
+            });
+        }
+
+        // "Sobre" e "Contato" (rodapé) ficam tão perto um do outro
+        // que o fim da página chega ANTES do navegador conseguir
+        // rolar o rodapé até o meio da tela — ou seja, clicar em
+        // "Contato" rola o máximo possível e para exatamente na
+        // mesma posição que clicar em "Sobre" rolaria. Pela lógica
+        // pura de "qual seção tá no meio da tela" os dois empatam, e
+        // o Sobre sempre ganhava. Por isso: 1) um clique no menu
+        // marca o link ativo na hora, sem esperar o scroll decidir; e
+        // 2) por ~900ms depois do clique, o scroll-spy fica em silêncio
+        // pra não brigar com a rolagem suave e desfazer o clique.
+        let suprimirSpyAte = 0;
+        linksInternos.forEach(a => {
+            a.addEventListener('click', () => {
+                marcarLinkAtivo(a.getAttribute('href').slice(1));
+                suprimirSpyAte = Date.now() + 900;
+            });
+        });
+
+        // O rodapé também é mais baixo que a faixa de detecção do
+        // observer abaixo. Então, fora do caso de clique, quando o
+        // usuário rola manualmente (roda do mouse, barra de rolagem)
+        // até o fim de verdade da página, força o último link a
+        // virar o ativo — senão a barrinha fica presa numa seção
+        // anterior porque o rodapé nunca entra na faixa do meio.
+        function pertoDoFimDaPagina() {
+            return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+        }
+
+        const navSpyObserver = new IntersectionObserver((entries) => {
+            if (Date.now() < suprimirSpyAte) return;
+            // Perto do fim quem manda é o listener de scroll logo
+            // abaixo — se deixar o observer mexer aqui também, os
+            // dois competem (o observer roda depois e "rouba" o
+            // ativo de volta pra seção anterior).
+            if (pertoDoFimDaPagina()) return;
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                marcarLinkAtivo(entry.target.id);
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+        secoesComLink.forEach(sec => navSpyObserver.observe(sec));
+
+        function ativarUltimoLinkNoFimDaPagina() {
+            if (!linksInternos.length) return;
+            if (Date.now() < suprimirSpyAte) return;
+            if (pertoDoFimDaPagina()) {
+                const ultimoLink = linksInternos[linksInternos.length - 1];
+                marcarLinkAtivo(ultimoLink.getAttribute('href').slice(1));
+            }
+        }
+        window.addEventListener('scroll', ativarUltimoLinkNoFimDaPagina, { passive: true });
+        ativarUltimoLinkNoFimDaPagina();
 
         // ============================================================
         // FIX 2: Um único DOMContentLoaded inicializa tudo.

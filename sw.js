@@ -6,15 +6,20 @@
 // dashboard, guerra ao vivo e histórico continuam sempre buscando
 // dado fresco, sem risco de mostrar informação velha.
 
-const CACHE_NAME = 'ccbr-shell-v1';
+// v2: os ícones estavam referenciados como se existisse uma pasta
+// "icons/", mas os arquivos ficam soltos na raiz do projeto. Isso
+// fazia cache.addAll() falhar inteiro (um 404 quebra a lista toda),
+// e por causa disso o site nunca funcionou offline/instalado direito.
+const CACHE_NAME = 'ccbr-shell-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './style.css',
+    './design-system.css',
     './config.js',
     './manifest.json',
-    './icons/icon-192.png',
-    './icons/icon-512.png'
+    './icon-192.png',
+    './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
