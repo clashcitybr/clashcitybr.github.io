@@ -301,7 +301,7 @@
             const container = document.getElementById('guerra-container');
             try {
                 const response = await fetch(`${API_URL}/guerra-atual`, {
-                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                    headers: {}
                 });
                 if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
 
@@ -397,7 +397,7 @@
                 // API_URL vem de config.js — troque lá, não aqui, quando
                 // migrar o backend pra VPS.
                 const response = await fetch(`${API_URL}/membros`, {
-                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                    headers: {}
                 });
                 if (!response.ok) throw new Error(`Falha na API: ${response.status}`);
 
