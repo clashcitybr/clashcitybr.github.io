@@ -172,6 +172,17 @@
                 </div>
             </div>
 
+   <!-- BAGRE DO MÊS -->
+<div class="mvp-card scroll-anim" id="bagre-container" style="display:none; background: linear-gradient(135deg, #7f1d1d, #450a0a); border-color: #ef4444;">
+    <span class="mvp-badge" style="background:#ef4444; color:#fff;">🐟 BAGRE DO MÊS</span>
+    <h3 id="bagre-nome" style="font-size: 2rem; margin-bottom: 5px; color:#fca5a5;">--</h3>
+    <p id="bagre-cv" style="color: #ef4444; font-weight: 600; margin-bottom: 15px;">CV --</p>
+    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+        <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">Média de Estrelas</p>
+        <h4 id="bagre-media" style="font-size: 1.8rem; color: #ef4444;">0.0 ★</h4>
+    </div>
+</div>
+
             <div class="stats-grid">
                 <div class="stat-box scroll-anim">
                     <span class="stat-box-icone">👥</span>
@@ -191,6 +202,8 @@
             </div>
         </div>
     </section>
+
+ 
 
     <section id="historico" class="historico-section">
         <h2 class="scroll-anim" style="text-align:center; font-size: 2.5rem;">Hall da Fama</h2>
@@ -422,6 +435,19 @@
                 const mvp = ordenadoRanking[0];
                 const mediaMvp = mvp.mediaE.toFixed(1);
 
+                        // BAGRE DO MÊS
+const maxGuerras = Math.max(...membros.map(m => m.guerras));
+const minimoGuerras = Math.max(1, Math.floor(maxGuerras * 0.5));
+const candidatos = ordenadoRanking.filter(m => m.guerras >= minimoGuerras);
+
+if (candidatos.length > 0) {
+    const bagre = [...candidatos].sort((a, b) => a.mediaE - b.mediaE)[0];
+    document.getElementById('bagre-nome').innerText = bagre.nome;
+    document.getElementById('bagre-cv').innerText = `Centro de Vila ${bagre.cv}`;
+    document.getElementById('bagre-media').innerText = `${bagre.mediaE.toFixed(1)} ★`;
+    document.getElementById('bagre-container').style.display = 'block';
+}
+
                 document.getElementById('mvp-nome').innerText = mvp.nome;
                 document.getElementById('mvp-cv').innerText = `Centro de Vila ${mvp.cv}`;
                 document.getElementById('mvp-media').innerText = `${mediaMvp} ★`;
@@ -459,6 +485,7 @@
                     .forEach(id => document.getElementById(id).classList.remove('skeleton', 'skeleton-dark'));
             }
         }
+
 
         // ============================================================
         // HALL DA FAMA — TEMPORADAS ARQUIVADAS
