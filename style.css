@@ -163,12 +163,15 @@
             z-index: 10;
         }
 
-        .dash-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
+    .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    gap: 20px;
+    width: 50vw;
+    align-items: center;
+    justify-content: center;
+}
         @media (max-width: 768px) {
             .dash-grid {
                 grid-template-columns: 1fr;
