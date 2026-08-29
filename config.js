@@ -4,4 +4,4 @@
 // Cloud, ver DEPLOY.md), troque só esta linha — nenhum outro
 // arquivo do front-end precisa ser mexido.
 // ============================================================
-const BACKEND_URL = "http://163.176.63.240:3333";
+const API_URL = "https://cork-dice-gala.ngrok-free.dev";
