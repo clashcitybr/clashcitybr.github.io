@@ -555,6 +555,14 @@
         }
 
        @media (max-width: 600px) {
+
+        body {
+    padding-top: 70px;
+}
+
+header {
+    margin-top: -70px;
+}
     /* Dashboard — MVP e Bagre lado a lado compactos */
     .dash-grid {
         grid-template-columns: 1fr 1fr;
@@ -590,6 +598,48 @@
     .mvp-card > div {
         padding: 10px 8px !important;
     }
+
+    .historico-section {
+    overflow: hidden;
+}
+
+.historico-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+}
+
+.temporada-card {
+    padding: 8px 5px !important;
+    min-width: 0 !important;
+}
+
+.temporada-card h4 {
+    font-size: 0.65rem !important;
+    margin-bottom: 6px !important;
+}
+
+.podio-lista li {
+    font-size: 0.58rem !important;
+    padding: 3px 0 !important;
+    gap: 2px !important;
+}
+
+.podio-lista .nome {
+    max-width: 45px !important;
+    font-size: 0.58rem !important;
+    margin: 0 2px !important;
+}
+
+.podio-lista .media {
+    font-size: 0.58rem !important;
+}
+
+.podio-lista .posicao {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.5rem !important;
+    flex-shrink: 0 !important;
+}
 
     /* Stats em 2x2 */
     .stats-grid {
