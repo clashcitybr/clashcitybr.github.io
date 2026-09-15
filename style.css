@@ -559,9 +559,9 @@
         body {
     padding-top: 70px;
 }
-
 header {
-    margin-top: -70px;
+    padding-top: 70px;
+    height: calc(45vh + 70px);
 }
     /* Dashboard — MVP e Bagre lado a lado compactos */
     .dash-grid {
@@ -1016,7 +1016,8 @@ header {
     }
 
     .dashboard-section {
-        padding: 25px 3% 15px;
+        padding: 40px 3% 30px;
+        margin-bottom: 50px;
     }
 
     .dash-grid {
@@ -1106,6 +1107,7 @@ header {
 
     .historico-section {
         padding: 40px 4%;
+        padding-bottom: 80px;
     }
 
     .historico-container {
