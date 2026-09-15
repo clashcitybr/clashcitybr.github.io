@@ -165,18 +165,20 @@
 
     .dash-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: auto;
     gap: 20px;
-    width: 50vw;
-    align-items: center;
-    justify-content: center;
+    max-width: 900px;
+    align-items: start;
 }
-        @media (max-width: 768px) {
-            .dash-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+
+@media (max-width: 768px) {
+    .dash-grid {
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 10px;
+    }
+}
 
         .mvp-card {
             background: linear-gradient(135deg, #11032c 0%, #077187 100%);
@@ -552,15 +554,93 @@
             color: var(--primary);
         }
 
-        @media (max-width: 600px) {
-            .guerra-card {
-                padding: 20px;
-            }
+       @media (max-width: 600px) {
+    /* Dashboard — MVP e Bagre lado a lado compactos */
+    .dash-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+    }
 
-            .guerra-placar {
-                font-size: 1.1rem;
-            }
-        }
+    .mvp-card {
+        padding: 12px 10px;
+    }
+
+    .mvp-card h3 {
+        font-size: 0.95rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.2;
+    }
+
+    .mvp-card p {
+        font-size: 0.7rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    .mvp-badge {
+        font-size: 0.55rem !important;
+        padding: 2px 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    #mvp-media, #bagre-media {
+        font-size: 1.1rem !important;
+    }
+
+    .mvp-card > div {
+        padding: 10px 8px !important;
+    }
+
+    /* Stats em 2x2 */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px;
+    }
+
+    .stat-box {
+        padding: 14px 8px;
+    }
+
+    .stat-box h4 {
+        font-size: 0.6rem;
+    }
+
+    .stat-box .number {
+        font-size: 1.5rem;
+    }
+
+    /* Clãs — 1 coluna */
+    .clans-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .clan-card {
+        padding: 20px;
+    }
+
+    .clan-card img {
+        width: 80px;
+    }
+
+    /* Hall da Fama — 1 coluna */
+    .historico-container {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .about-section {
+        padding: 60px 5%;
+        gap: 30px;
+    }
+
+    .about-image img {
+        max-width: 60%;
+    }
+}
 
         .clans-section {
             padding: 80px 5%;
@@ -863,12 +943,272 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 768px) {
-            .video-item {
-                flex: 1 1 100%;
-            }
+        /* ============================================================
+   MOBILE — substitui os blocos @media existentes
+   Tela pequena: tudo compacto, nada dominando a tela
+   ============================================================ */
 
-            header h1 {
-                font-size: 2.5rem;
-            }
-        }
+@media (max-width: 600px) {
+    body {
+        font-size: 13px;
+    }
+
+    header {
+        height: 45vh;
+    }
+
+    header h1 {
+        font-size: 1.3rem !important;
+    }
+
+    header p {
+        font-size: 0.78rem;
+    }
+
+    .dashboard-section {
+        padding: 25px 3% 15px;
+    }
+
+    .dash-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .mvp-card {
+        padding: 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    .stat-box {
+        padding: 12px 6px !important;
+    }
+
+    .stat-box h4 {
+        font-size: 0.6rem !important;
+    }
+
+    .stat-box .number {
+        font-size: 1.3rem !important;
+    }
+
+    .clans-section {
+        padding: 40px 4%;
+    }
+.podio-lista .nome {
+    max-width: 70px !important;
+    font-size: 0.6rem !important;
+}
+
+.podio-lista .media {
+    font-size: 0.6rem !important;
+}
+
+.temporada-card h4 {
+    font-size: 0.75rem !important;
+}
+    .clans-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+}
+.clans-container > .clan-card:nth-child(3) {
+    grid-column: 1 / -1;
+    width: calc(50% - 5px);
+    justify-self: center;
+}
+.clan-card {
+    padding: 14px 10px !important;
+}
+
+.clan-card img {
+    width: 55px !important;
+    margin-bottom: 8px !important;
+}
+
+.clan-card h3 {
+    font-size: 0.85rem !important;
+    margin-bottom: 6px !important;
+}
+
+.clan-card p {
+    font-size: 0.72rem !important;
+    margin-bottom: 6px !important;
+}
+
+.clan-card ul {
+    margin: 8px 0 !important;
+}
+
+.clan-card li {
+    font-size: 0.7rem !important;
+    margin-bottom: 4px !important;
+}
+
+.btn-join {
+    padding: 8px !important;
+    font-size: 0.75rem !important;
+}
+
+    .historico-section {
+        padding: 40px 4%;
+    }
+
+    .historico-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+}
+
+.temporada-card {
+    padding: 10px 8px !important;
+}
+
+.temporada-card h4 {
+    font-size: 0.75rem !important;
+    margin-bottom: 8px !important;
+}
+
+.podio-lista li {
+    font-size: 0.65rem !important;
+    padding: 4px 0 !important;
+}
+
+.podio-lista .nome {
+    font-size: 0.65rem !important;
+    margin: 0 4px !important;
+}
+
+.podio-lista .media {
+    font-size: 0.65rem !important;
+}
+
+.podio-lista .posicao {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 0.55rem !important;
+}
+    .video-item {
+        flex: 1 1 100%;
+    }
+
+    .about-section {
+        padding: 50px 5% !important;
+        gap: 20px !important;
+    }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+    .dash-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    #insta-feed-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    display: grid !important;
+}
+.podio-lista .nome {
+    max-width: 60px !important;
+    font-size: 0.65rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.podio-lista .media {
+    font-size: 0.65rem !important;
+}
+
+.podio-lista .posicao {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 0.55rem !important;
+}
+
+.temporada-card {
+    padding: 12px 8px !important;
+}
+
+.temporada-card h4 {
+    font-size: 0.8rem !important;
+    margin-bottom: 8px !important;
+}
+
+    .clans-container {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .clans-container > .clan-card:nth-child(3) {
+        grid-column: 1 / -1;
+        width: calc(50% - 10px);
+        justify-self: center;
+    }
+
+    .historico-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .temporada-card {
+        padding: 14px !important;
+    }
+
+    .temporada-card h4 {
+        font-size: 0.9rem !important;
+    }
+
+    .podio-lista li {
+        font-size: 0.8rem !important;
+    }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+    .dash-grid {
+        grid-template-columns: 1fr 1fr;
+        max-width: 800px;
+    }
+
+    .stats-grid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-box h4 {
+        font-size: 0.8rem;
+    }
+
+    .stat-box .number {
+        font-size: 1.6rem;
+    }
+
+    .clans-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .clans-container > .clan-card:nth-child(3) {
+        grid-column: 1 / -1;
+        width: calc(50% - 10px);
+        justify-self: center;
+    }
+
+    .historico-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+#insta-feed-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+}
+}
+@media (min-width: 1201px) {
+    .stats-grid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
