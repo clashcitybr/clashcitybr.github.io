@@ -172,6 +172,31 @@
     align-items: start;
 }
 
+.btn-entrar-jogo {
+    display: inline-block;
+    margin-top: 35px;
+    background: var(--primary);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(249,210,70,0.4);
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.btn-entrar-jogo:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(249,210,70,0.6);
+    background: #ffe566;
+}
+
+.btn-entrar-jogo:active {
+    transform: translateY(0) scale(0.98);
+}
+
 @media (max-width: 768px) {
     .dash-grid {
         grid-template-columns: 1fr 1fr;
