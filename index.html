@@ -274,37 +274,43 @@
     </footer>
 
     <script>
+// MENU HAMBÚRGUER
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+const navOverlay = document.getElementById('nav-overlay');
 
-        // MENU HAMBÚRGUER
-        // ============================================================
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        const navOverlay = document.getElementById('nav-overlay');
+function fecharMenu() {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
 
-        function fecharMenu() {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            navOverlay.classList.remove('active');
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    
+    if (navLinks.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('active')) {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            fecharMenu();
         }
+    }
+});
 
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active')) {
-                if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-                    fecharMenu();
-                }
-            }
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', fecharMenu);
-        });
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', fecharMenu);
+});
+      
 
         // ============================================================
         // GUERRA AO VIVO
@@ -708,28 +714,6 @@
         function pertoDoFimDaPagina() {
             return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
         }
-
-        // Trava o scroll quando menu abre
-
-        function fecharMenu() {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-    navOverlay.classList.remove('active');
-    document.body.style.overflow = ''; // Destrava o scroll
-}
-hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    
-    // Trava/destrava o scroll do body
-    if (navLinks.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
-});
 
 
         const navSpyObserver = new IntersectionObserver((entries) => {
