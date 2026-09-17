@@ -1245,6 +1245,8 @@ header {
         font-size: 0.8rem !important;
     }
 }
+
+
 @media (min-width: 901px) and (max-width: 1200px) {
     .dash-grid {
         grid-template-columns: 1fr 1fr;
