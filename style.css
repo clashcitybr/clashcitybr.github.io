@@ -95,7 +95,7 @@ nav {
     width: 35vw;
     height: 50px;
     display: inline-block;
-    margin-top: 25px;
+    margin-top: 15px;
     background: var(--primary);
     color: var(--dark) !important;
     font-weight: 700;
