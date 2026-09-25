@@ -92,11 +92,13 @@ nav {
 }
 
 .btn-entrar-jogo {
+    width: 35vw;
+    height: 50px;
     display: inline-block;
-    margin-top: 35px;
+    margin-top: 25px;
     background: var(--primary);
     color: var(--dark) !important;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1rem;
     padding: 14px 32px;
     border-radius: 50px;
