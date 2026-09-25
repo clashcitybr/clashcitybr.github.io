@@ -90,10 +90,7 @@ nav {
     background: var(--primary);
     border-radius: 2px;
 }
-
 .btn-entrar-jogo {
-    width: 35vw;
-    height: 50px;
     display: inline-block;
     margin-top: 15px;
     background: var(--primary);
@@ -817,6 +814,11 @@ header p {
 .btn-join:hover {
     background: #077187;
     color: white;
+}
+
+.btn-entrar-jogo {
+    padding: 8px 15px;
+   
 }
 
 /* --- NOVO: HALL DA FAMA (TEMPORADAS ARQUIVADAS) --- */
