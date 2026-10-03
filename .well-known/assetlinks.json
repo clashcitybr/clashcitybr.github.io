@@ -1,10 +1,13 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "io.github.clashcitybr.twa",
-    "sha256_cert_fingerprints": [
-      "EA:10:C5:52:38:4B:95:2C:BB:A9:EB:E1:2C:A4:FD:63:6F:0C:FD:1C:7C:68:1C:25:B3:DF:96:6A:E4:B6:69:E4"
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.clashcitybr.twa",
+      "sha256_cert_fingerprints": [
+        "10:31:E2:65:65:2F:CC:5C:A7:09:1A:A5:2B:AE:96:7B:3E:D3:B9:68:16:AB:B8:9D:6D:91:E0:01:7F:FA:26:86",
+        "EA:10:C5:52:38:4B:95:2C:BB:A9:EB:E1:2C:A4:FD:63:6F:0C:FD:1C:7C:68:1C:25:B3:DF:96:6A:E4:B6:69:E4"
+      ]
+    }
   }
-}]
+]
