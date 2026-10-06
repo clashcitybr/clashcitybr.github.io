@@ -1279,3 +1279,31 @@ footer {
         justify-content: center;
     }
 }
+/* ============================================================
+   GUERRA AO VIVO — selo e link quando a guerra é da Liga (CWL)
+   ============================================================ */
+.guerra-liga-selo {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 10px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    border: 1px solid rgba(249, 210, 70, 0.6);
+    border-radius: 20px;
+    padding: 4px 12px;
+}
+
+.guerra-liga-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.guerra-liga-link:hover {
+    text-decoration: underline;
+}

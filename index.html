@@ -360,6 +360,15 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 }
                 guerraJaCarregouUmaVez = true;
 
+                // Durante a Liga o backend devolve a guerra da rodada com o campo "liga"
+                const naLiga = !!guerra.liga;
+                const seloLiga = naLiga
+                    ? `<span class="guerra-liga-selo">🏅 LIGA · RODADA ${guerra.liga.rodada}/${guerra.liga.totalRodadas}</span>`
+                    : '';
+                const linkLiga = naLiga
+                    ? `<a class="guerra-liga-link" href="https://clashcitybr.github.io/liga/#guerras-liga">Ver todas as rodadas →</a>`
+                    : '';
+
                 if (guerra.state === 'notInWar') {
                     container.innerHTML = `
                         <div class="guerra-card guerra-neutra">
@@ -373,8 +382,10 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     const inicio = parseDataCoC(guerra.startTime);
                     container.innerHTML = `
                         <div class="guerra-card guerra-preparacao">
+                            ${seloLiga}
                             <span class="guerra-badge">⏳ PREPARAÇÃO</span>
                             <p>Guerra contra <strong>${guerra.opponent?.name || 'adversário'}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
+                            ${linkLiga}
                         </div>`;
                     return;
                 }
@@ -394,6 +405,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
                     container.innerHTML = `
                         <div class="guerra-card guerra-ativa">
+                            ${seloLiga}
                             <span class="guerra-badge">⚔️ GUERRA EM ANDAMENTO</span>
                             <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${guerra.clan?.stars ?? 0}★</strong>
                                 &nbsp;vs&nbsp;
@@ -403,6 +415,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                                 <p class="guerra-pendentes-titulo">${pendentes.length > 0 ? `${pendentes.length} membro(s) ainda não atacaram:` : ''}</p>
                                 <div class="guerra-chips">${chipsHtml}</div>
                             </div>
+                            ${linkLiga}
                         </div>`;
                     return;
                 }
@@ -413,18 +426,27 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     let resultado = 'EMPATE';
                     let classeResultado = 'guerra-empate';
                     let icone = '🤝';
-                    if (nossasEstrelas > estrelasAdversario) {
+                    // Empate em estrelas se decide pela % de destruição (regra do jogo)
+                    const nossaDestruicao = guerra.clan?.destructionPercentage ?? 0;
+                    const destruicaoAdversario = guerra.opponent?.destructionPercentage ?? 0;
+                    const vencemos = nossasEstrelas > estrelasAdversario
+                        || (nossasEstrelas === estrelasAdversario && nossaDestruicao > destruicaoAdversario);
+                    const perdemos = nossasEstrelas < estrelasAdversario
+                        || (nossasEstrelas === estrelasAdversario && nossaDestruicao < destruicaoAdversario);
+                    if (vencemos) {
                         resultado = 'VITÓRIA'; classeResultado = 'guerra-vitoria'; icone = '🏆';
-                    } else if (nossasEstrelas < estrelasAdversario) {
+                    } else if (perdemos) {
                         resultado = 'DERROTA'; classeResultado = 'guerra-derrota'; icone = '💀';
                     }
 
                     container.innerHTML = `
                         <div class="guerra-card guerra-encerrada ${classeResultado}">
+                            ${seloLiga}
                             <span class="guerra-badge">${icone} GUERRA ENCERRADA — ${resultado}</span>
                             <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${nossasEstrelas}★</strong>
                                 &nbsp;vs&nbsp;
                                 <strong>${estrelasAdversario}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
+                            ${linkLiga}
                         </div>`;
                     return;
                 }
