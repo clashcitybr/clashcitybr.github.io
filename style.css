@@ -681,9 +681,9 @@ header p {
 
 .clans-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    max-width: 1320px;
     margin: 40px auto;
 }
 
@@ -725,6 +725,11 @@ header p {
     background: var(--accent);
 }
 
+/* Clã parceiro: faixa escura pra diferenciar da família */
+.clan-card.clan-parceiro::before {
+    background: var(--dark);
+}
+
 .clan-card img {
     width: 120px;
     margin-bottom: 20px;
@@ -732,7 +737,7 @@ header p {
 
 .clan-card h3 {
     color: var(--secondary);
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     margin-bottom: 10px;
 }
 
@@ -1044,12 +1049,6 @@ footer {
         gap: 10px !important;
     }
 
-    .clans-container>.clan-card:nth-child(3) {
-        grid-column: 1 / -1;
-        width: calc(50% - 5px);
-        justify-self: center;
-    }
-
     .clan-card {
         padding: 14px 10px !important;
     }
@@ -1113,12 +1112,6 @@ footer {
     .clans-container {
         grid-template-columns: 1fr 1fr !important;
     }
-
-    .clans-container>.clan-card:nth-child(3) {
-        grid-column: 1 / -1;
-        width: calc(50% - 10px);
-        justify-self: center;
-    }
 }
 
 
@@ -1143,12 +1136,6 @@ footer {
 
     .clans-container {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .clans-container>.clan-card:nth-child(3) {
-        grid-column: 1 / -1;
-        width: calc(50% - 10px);
-        justify-self: center;
     }
 
     .historico-container {
