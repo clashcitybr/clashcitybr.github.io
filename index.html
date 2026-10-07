@@ -190,7 +190,7 @@
     <section class="dashboard-section">
         <div class="dash-grid">
             <div class="mvp-card scroll-anim" id="mvp-container">
-                <span class="mvp-badge">👑 MVP DA TEMPORADA</span>
+                <span class="mvp-badge" id="mvp-badge">👑 MVP DA TEMPORADA</span>
                 <h3 id="mvp-nome" class="skeleton" style="font-size: 2rem; margin-bottom: 5px;">Carregando nome do MVP
                 </h3>
                 <p id="mvp-cv" class="skeleton" style="color: var(--primary); font-weight: 600; margin-bottom: 15px;">CV
@@ -200,6 +200,7 @@
                     <h4 id="mvp-media" class="skeleton skeleton-dark" style="font-size: 1.8rem; color: var(--primary);">
                         0.0 ★</h4>
                 </div>
+                <p id="mvp-nota" style="display:none; font-size: 0.8rem; opacity: 0.8; margin-top: 12px;"></p>
             </div>
 
             <!-- BAGRE DO MÊS -->
@@ -222,7 +223,7 @@
                 </div>
                 <div class="stat-box scroll-anim">
                     <span class="stat-box-icone">⭐</span>
-                    <h4>Atacantes PRO</h4>
+                    <h4 id="stat-pro-label">Atacantes PRO</h4>
                     <p class="number skeleton" id="stat-pro" style="color: #2ec4b6;">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
@@ -508,8 +509,36 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                         return b.cvNum - a.cvNum;
                     });
 
-                const mvp = ordenadoRanking[0];
-                const mediaMvp = mvp.mediaE.toFixed(1);
+                let mvp = ordenadoRanking[0];
+                let mediaMvp = mvp.mediaE.toFixed(1);
+
+                // INÍCIO DE MÊS: enquanto ninguém tem guerra na temporada, o "MVP"
+                // seria só o primeiro da lista com média 0.0. Em vez disso mostra
+                // o campeão da temporada anterior (mesma fonte do Hall da Fama).
+                const temporadaSemGuerras = membros.every(m => !m.guerras);
+                let campeaoAnterior = null;
+                if (temporadaSemGuerras) {
+                    try {
+                        const respHist = await fetch(`${API_URL}/historico`, {
+                            headers: { 'ngrok-skip-browser-warning': 'true' }
+                        });
+                        const temporadas = respHist.ok ? await respHist.json() : [];
+                        const ultima = Array.isArray(temporadas) ? temporadas[0] : null;
+                        const lista = ultima?.snapshot || [];
+                        if (lista.length > 0) {
+                            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                            const nomeMes = meses[parseInt(ultima.mes.split('-')[1], 10) - 1] || ultima.mes;
+                            campeaoAnterior = {
+                                jogador: lista[0],
+                                nomeMes,
+                                pros: lista.filter(j => (j.mediaEstrelas ?? 0) >= 5.0).length
+                            };
+                        }
+                    } catch (e) {
+                        console.warn('Histórico indisponível para o card de campeão:', e.message);
+                    }
+                }
 
                 // BAGRE DO MÊS
                 const maxGuerras = Math.max(...membros.map(m => m.guerras));
@@ -524,9 +553,27 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     document.getElementById('bagre-container').style.display = 'block';
                 }
 
-                document.getElementById('mvp-nome').innerText = mvp.nome;
-                document.getElementById('mvp-cv').innerText = `Centro de Vila ${mvp.cv}`;
-                document.getElementById('mvp-media').innerText = `${mediaMvp} ★`;
+                const notaMvp = document.getElementById('mvp-nota');
+                // Sem guerras no mês não existe card de Bagre ao lado — o card
+                // principal ocupa a linha inteira em vez de deixar um buraco.
+                document.getElementById('mvp-container').style.gridColumn = temporadaSemGuerras ? '1 / -1' : '';
+                if (campeaoAnterior) {
+                    const c = campeaoAnterior.jogador;
+                    document.getElementById('mvp-badge').innerText = `👑 CAMPEÃO DE ${campeaoAnterior.nomeMes.toUpperCase()}`;
+                    document.getElementById('mvp-nome').innerText = c.nome;
+                    document.getElementById('mvp-cv').innerText = `Centro de Vila ${c.cv}`;
+                    document.getElementById('mvp-media').innerText = `${(c.mediaEstrelas ?? 0).toFixed(1)} ★`;
+                    notaMvp.innerText = 'A nova temporada começa a contar na primeira guerra do mês.';
+                    notaMvp.style.display = 'block';
+                } else if (temporadaSemGuerras) {
+                    document.getElementById('mvp-nome').innerText = 'Temporada começando';
+                    document.getElementById('mvp-cv').innerText = 'O MVP aparece depois da primeira guerra';
+                    document.getElementById('mvp-media').innerText = '—';
+                } else {
+                    document.getElementById('mvp-nome').innerText = mvp.nome;
+                    document.getElementById('mvp-cv').innerText = `Centro de Vila ${mvp.cv}`;
+                    document.getElementById('mvp-media').innerText = `${mediaMvp} ★`;
+                }
 
                 // Métricas coletivas
                 let totalCv = 0;
@@ -540,7 +587,13 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
                 document.getElementById('stat-total').innerText = membros.length;
                 document.getElementById('stat-cv').innerText = `CV ${(totalCv / membros.length).toFixed(0)}`;
-                document.getElementById('stat-pro').innerText = countPro;
+                if (campeaoAnterior) {
+                    // Sem guerras no mês, "0 atacantes PRO" passa a ideia errada
+                    document.getElementById('stat-pro').innerText = campeaoAnterior.pros;
+                    document.getElementById('stat-pro-label').innerText = `Atacantes PRO em ${campeaoAnterior.nomeMes}`;
+                } else {
+                    document.getElementById('stat-pro').innerText = temporadaSemGuerras ? '—' : countPro;
+                }
 
                 // Dados chegaram — tira o efeito de "carregando" (shimmer)
                 ['mvp-nome', 'mvp-cv', 'mvp-media', 'stat-total', 'stat-pro', 'stat-cv']
