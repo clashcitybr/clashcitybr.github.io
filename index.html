@@ -218,7 +218,7 @@
             <div class="stats-grid">
                 <div class="stat-box scroll-anim">
                     <span class="stat-box-icone">👥</span>
-                    <h4>Membros Rastreados</h4>
+                    <h4 id="stat-total-label">Membros Rastreados</h4>
                     <p class="number skeleton" id="stat-total">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
@@ -529,10 +529,15 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                                 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
                             const nomeMes = meses[parseInt(ultima.mes.split('-')[1], 10) - 1] || ultima.mes;
+                            const participantes = lista.filter(j => (j.guerras ?? 1) > 0);
                             campeaoAnterior = {
                                 jogador: lista[0],
                                 nomeMes,
-                                pros: lista.filter(j => (j.mediaEstrelas ?? 0) >= 5.0).length
+                                pros: lista.filter(j => (j.mediaEstrelas ?? 0) >= 5.0).length,
+                                participantes: participantes.length,
+                                cvMedio: participantes.length
+                                    ? participantes.reduce((s, j) => s + (j.cv || 0), 0) / participantes.length
+                                    : 0
                             };
                         }
                     } catch (e) {
@@ -579,14 +584,26 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 let totalCv = 0;
                 let countPro = 0;
 
-                membros.forEach(m => {
+                // Só entra na conta quem já guerreou neste mês — quem saiu do clã
+                // continua no banco, mas não infla os números da temporada.
+                const ativos = membros.filter(m => m.guerras > 0);
+
+                ativos.forEach(m => {
                     totalCv += m.cv;
-                    const media = m.guerras > 0 ? m.totalEstrelas / m.guerras : 0;
-                    if (media >= 5.0) countPro++;
+                    if (m.totalEstrelas / m.guerras >= 5.0) countPro++;
                 });
 
-                document.getElementById('stat-total').innerText = membros.length;
-                document.getElementById('stat-cv').innerText = `CV ${(totalCv / membros.length).toFixed(0)}`;
+                if (ativos.length > 0) {
+                    document.getElementById('stat-total').innerText = ativos.length;
+                    document.getElementById('stat-cv').innerText = `CV ${(totalCv / ativos.length).toFixed(0)}`;
+                } else if (campeaoAnterior && campeaoAnterior.participantes > 0) {
+                    document.getElementById('stat-total').innerText = campeaoAnterior.participantes;
+                    document.getElementById('stat-total-label').innerText = `Membros Rastreados em ${campeaoAnterior.nomeMes}`;
+                    document.getElementById('stat-cv').innerText = `CV ${campeaoAnterior.cvMedio.toFixed(0)}`;
+                } else {
+                    document.getElementById('stat-total').innerText = '—';
+                    document.getElementById('stat-cv').innerText = '—';
+                }
                 if (campeaoAnterior) {
                     // Sem guerras no mês, "0 atacantes PRO" passa a ideia errada
                     document.getElementById('stat-pro').innerText = campeaoAnterior.pros;
