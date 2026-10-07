@@ -594,7 +594,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     const podioHtml = top3.length > 0
                         ? top3.map(jogador => `
                             <li>
-                                <span class="posicao">#${jogador.posicao}</span>
+                                <span class="posicao">${jogador.posicao}</span>
                                 <span class="nome">${jogador.nome}</span>
                                 <span class="media">${(jogador.mediaEstrelas ?? 0).toFixed(1)} ★</span>
                             </li>`).join('')
