@@ -55,7 +55,13 @@ nav {
 
 .nav-links {
     display: flex;
+    align-items: center;   /* links no meio da barra, mesmo se algo quebrar linha */
     gap: 25px;
+}
+
+/* Título "Clash City BR" só existe no menu lateral do celular */
+.nav-links-header {
+    display: none;
 }
 
 .nav-links a {
@@ -324,6 +330,7 @@ nav {
     }
 
     .nav-links-header {
+        display: block;
         color: var(--primary);
         font-weight: 800;
         font-size: 0.85rem;
