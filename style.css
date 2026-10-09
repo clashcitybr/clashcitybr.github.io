@@ -1330,3 +1330,10 @@ footer {
         font-size: 1.1rem !important;
     }
 }
+
+
+/* Com 11 links no menu, telas de notebook menores precisam de um menu mais compacto */
+@media (min-width: 901px) and (max-width: 1250px) {
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 0.74rem; }
+}
