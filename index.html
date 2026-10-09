@@ -93,6 +93,7 @@
                 <a href="https://clashcitybr.github.io/liga/" class="nav-external">Liga</a>
                 <a href="https://clashcitybr.github.io/controle-cla/" class="nav-external">Desempenho</a>
                 <a href="https://clashcitybr.github.io/controle-cla/membros.html" class="nav-external">Membros</a>
+                <a href="https://clashcitybr.github.io/controle-cla/capital.html" class="nav-external">Capital</a>
             </div>
         </div>
     </nav>
@@ -202,6 +203,18 @@
                         0.0 ★</h4>
                 </div>
                 <p id="mvp-nota" style="display:none; font-size: 0.8rem; opacity: 0.8; margin-top: 12px;"></p>
+            </div>
+
+            <!-- MURALHA DO MÊS — quem menos tomou estrelas na defesa -->
+            <div class="mvp-card muralha-card scroll-anim" id="muralha-container" style="display:none;">
+                <span class="mvp-badge muralha-badge">🛡️ MURALHA DO MÊS</span>
+                <h3 id="muralha-nome" style="font-size: 2rem; margin-bottom: 5px; color:#bfdbfe;">--</h3>
+                <p id="muralha-cv" style="color: #93c5fd; font-weight: 600; margin-bottom: 15px;">CV --</p>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                    <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">Estrelas tomadas por defesa</p>
+                    <h4 id="muralha-media" style="font-size: 1.8rem; color: #93c5fd;">0.0 ★</h4>
+                </div>
+                <p id="muralha-nota" style="font-size: 0.8rem; opacity: 0.85; margin-top: 12px;"></p>
             </div>
 
             <!-- BAGRE DO MÊS -->
@@ -635,6 +648,34 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 
         // ============================================================
+        // MURALHA DO MÊS — defesas registradas pelo servidor
+        // ============================================================
+        async function carregarMuralha() {
+            try {
+                const resp = await fetch(`${API_URL}/defesas`, {
+                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                });
+                if (!resp.ok) return;   // backend antigo, sem a rota: o card só não aparece
+                const dados = await resp.json();
+                const m = dados?.muralha;
+                if (!m) return;          // ninguém com defesas suficientes ainda no mês
+
+                document.getElementById('muralha-nome').innerText = m.nome;
+                document.getElementById('muralha-cv').innerText = `Centro de Vila ${m.cv}`;
+                document.getElementById('muralha-media').innerText = `${Number(m.mediaEstrelas).toFixed(1)} ★`;
+                const perfeitas = m.defesasPerfeitas > 0
+                    ? ` · ${m.defesasPerfeitas} sem tomar estrela`
+                    : '';
+                document.getElementById('muralha-nota').innerText =
+                    `${m.defesas} ${m.defesas === 1 ? 'defesa' : 'defesas'}${perfeitas}`;
+                document.getElementById('muralha-container').style.display = 'block';
+                document.querySelector('.dash-grid').classList.add('tres');
+            } catch (e) {
+                console.warn('Muralha do mês indisponível:', e.message);
+            }
+        }
+
+        // ============================================================
         // HALL DA FAMA — TEMPORADAS ARQUIVADAS
         // ============================================================
         async function carregarHistorico() {
@@ -870,6 +911,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
             carregarGuerraAoVivo();
             carregarDashboard();
+            carregarMuralha();
             carregarHistorico();
             carregarInstagram();
             iniciarAnimacaoEmblema();
