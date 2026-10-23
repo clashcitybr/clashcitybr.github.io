@@ -742,7 +742,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 document.getElementById('muralha-cv').innerText = `Centro de Vila ${m.cv}`;
                 if (m.seguradas === undefined) return;   // backend antigo (regra velha): não mostra
                 document.getElementById('muralha-media').innerText = `${m.seguradas} 🛡️`;
-                const partes = ['Conta quando a vila toma 0, 1 ou 2★'];
+                const partes = [`${m.seguradas}/${m.ataquesSofridos} ataques recebidos segurados`];
                 if (m.defesasPerfeitas > 0) partes.push(`${m.defesasPerfeitas} sem tomar estrela`);
                 document.getElementById('muralha-nota').innerText = partes.join(' · ');
                 document.getElementById('muralha-container').style.display = 'block';
