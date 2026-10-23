@@ -101,6 +101,19 @@
         .atalho-painel-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35; }
         .atalho-painel-texto b { color: #11032c; font-size: 1rem; }
         .atalho-painel-texto small { font-size: 0.8rem; color: #5b6475; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .guerra-mapa-link {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            background: #f9d246;
+            color: #11032c !important;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(249, 210, 70, 0.35);
+        }
+        .guerra-mapa-link:hover { background: #ffe566; }
         /* "Meu Painel" no menu: só no celular (no computador o atalho é o card) */
         .nav-links a.nav-painel { color: #f9d246; font-weight: 800; }
         @media (min-width: 901px) { .nav-links a.nav-painel { display: none; } }
@@ -464,6 +477,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                             ${seloLiga}
                             <span class="guerra-badge">⏳ PREPARAÇÃO</span>
                             <p>Guerra contra <strong>${guerra.opponent?.name || 'adversário'}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
+                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">🗺️ Ver mapa da guerra</a>
                             ${linkLiga}
                         </div>`;
                     return;
@@ -494,6 +508,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                                 <p class="guerra-pendentes-titulo">${pendentes.length > 0 ? `${pendentes.length} membro(s) ainda não atacaram:` : ''}</p>
                                 <div class="guerra-chips">${chipsHtml}</div>
                             </div>
+                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">🗺️ Ver mapa da guerra</a>
                             ${linkLiga}
                         </div>`;
                     return;
