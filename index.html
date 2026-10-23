@@ -273,7 +273,7 @@
                 <h3 id="muralha-nome" style="font-size: 2rem; margin-bottom: 5px; color:#bfdbfe;">--</h3>
                 <p id="muralha-cv" style="color: #93c5fd; font-weight: 600; margin-bottom: 15px;">CV --</p>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                    <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">Defesas seguradas</p>
+                    <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">Defesas no mês</p>
                     <h4 id="muralha-media" style="font-size: 1.8rem; color: #93c5fd;">0 🛡️</h4>
                 </div>
                 <p id="muralha-nota" style="font-size: 0.8rem; opacity: 0.85; margin-top: 12px;"></p>
@@ -742,7 +742,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 document.getElementById('muralha-cv').innerText = `Centro de Vila ${m.cv}`;
                 if (m.seguradas === undefined) return;   // backend antigo (regra velha): não mostra
                 document.getElementById('muralha-media').innerText = `${m.seguradas} 🛡️`;
-                const partes = [`segurou ${m.seguradas} de ${m.ataquesSofridos} ${m.ataquesSofridos === 1 ? 'ataque' : 'ataques'}`];
+                const partes = ['Conta quando a vila toma 0, 1 ou 2★'];
                 if (m.defesasPerfeitas > 0) partes.push(`${m.defesasPerfeitas} sem tomar estrela`);
                 document.getElementById('muralha-nota').innerText = partes.join(' · ');
                 document.getElementById('muralha-container').style.display = 'block';
