@@ -121,9 +121,14 @@
     </style>
     <!-- Ícones comuns (se não carregar, a página segue sem eles) -->
     <script src="https://clashcitybr.github.io/controle-cla/icones.js?v=1"></script>
-    <script>window.ic = window.ic || function () { return ''; };</script>
+    <script>
+        window.ic = window.ic || function () { return ''; };
+        window.escHTML = window.escHTML || (t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])));
+    </script>
     <!-- Tema visual comum (carregado por último) -->
     <link rel="stylesheet" href="https://clashcitybr.github.io/controle-cla/tema.css?v=1">
+    <!-- Contador anônimo de uso -->
+    <script src="https://clashcitybr.github.io/controle-cla/uso.js?v=1" defer></script>
 </head>
 
 <body>
@@ -481,7 +486,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                         <div class="guerra-card guerra-preparacao">
                             ${seloLiga}
                             <span class="guerra-badge">${ic('ampulheta')} PREPARAÇÃO</span>
-                            <p>Guerra contra <strong>${guerra.opponent?.name || 'adversário'}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
+                            <p>Guerra contra <strong>${escHTML(guerra.opponent?.name || 'adversário')}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
                             <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">${ic('mapa')} Ver mapa da guerra</a>
                             ${linkLiga}
                         </div>`;
@@ -498,16 +503,16 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                             ataquesFeitos: Array.isArray(m.attacks) ? m.attacks.length : 0
                         }));
                     const chipsHtml = pendentes.length > 0
-                        ? pendentes.map(m => `<span class="guerra-chip">${m.nome} (${m.ataquesFeitos}/${guerra.attacksPerMember})</span>`).join('')
+                        ? pendentes.map(m => `<span class="guerra-chip">${escHTML(m.nome)} (${m.ataquesFeitos}/${guerra.attacksPerMember})</span>`).join('')
                         : `<span class="guerra-chip guerra-chip-ok">${ic('festa')} Todo mundo já atacou!</span>`;
 
                     container.innerHTML = `
                         <div class="guerra-card guerra-ativa">
                             ${seloLiga}
                             <span class="guerra-badge">${ic('guerra')} GUERRA EM ANDAMENTO</span>
-                            <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${guerra.clan?.stars ?? 0}★</strong>
+                            <p class="guerra-placar">${escHTML(guerra.clan?.name || 'Nós')} <strong>${guerra.clan?.stars ?? 0}★</strong>
                                 &nbsp;vs&nbsp;
-                                <strong>${guerra.opponent?.stars ?? 0}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
+                                <strong>${guerra.opponent?.stars ?? 0}★</strong> ${escHTML(guerra.opponent?.name || 'Adversário')}</p>
                             <p class="guerra-tempo">Faltam ${formatarTempoRestante(fim)} para o fim</p>
                             <div class="guerra-pendentes">
                                 <p class="guerra-pendentes-titulo">${pendentes.length > 0 ? `${pendentes.length} membro(s) ainda não atacaram:` : ''}</p>
@@ -542,9 +547,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                         <div class="guerra-card guerra-encerrada ${classeResultado}">
                             ${seloLiga}
                             <span class="guerra-badge">${icone} GUERRA ENCERRADA — ${resultado}</span>
-                            <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${nossasEstrelas}★</strong>
+                            <p class="guerra-placar">${escHTML(guerra.clan?.name || 'Nós')} <strong>${nossasEstrelas}★</strong>
                                 &nbsp;vs&nbsp;
-                                <strong>${estrelasAdversario}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
+                                <strong>${estrelasAdversario}★</strong> ${escHTML(guerra.opponent?.name || 'Adversário')}</p>
                             ${linkLiga}
                         </div>`;
                     return;
@@ -789,7 +794,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                         ? top3.map(jogador => `
                             <li>
                                 <span class="posicao">${jogador.posicao}</span>
-                                <span class="nome">${jogador.nome}</span>
+                                <span class="nome">${escHTML(jogador.nome)}</span>
                                 <span class="media">${(jogador.mediaEstrelas ?? 0).toFixed(1)} ★</span>
                             </li>`).join('')
                         : '<li>Sem dados registrados</li>';
