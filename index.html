@@ -119,6 +119,9 @@
         @media (min-width: 901px) { .nav-links a.nav-painel { display: none; } }
         .atalho-painel-seta { font-size: 1.8rem; color: #077187; flex-shrink: 0; line-height: 1; }
     </style>
+    <!-- Ícones comuns (se não carregar, a página segue sem eles) -->
+    <script src="https://clashcitybr.github.io/controle-cla/icones.js?v=1"></script>
+    <script>window.ic = window.ic || function () { return ''; };</script>
     <!-- Tema visual comum (carregado por último) -->
     <link rel="stylesheet" href="https://clashcitybr.github.io/controle-cla/tema.css?v=1">
 </head>
@@ -134,7 +137,7 @@
             </button>
             <div class="nav-links" id="nav-links">
                 <div class="nav-links-header">Clash City BR</div>
-                <a href="https://clashcitybr.github.io/controle-cla/meu-painel.html" class="nav-external nav-painel">👤 Meu Painel</a>
+                <a href="https://clashcitybr.github.io/controle-cla/meu-painel.html" class="nav-external nav-painel"><i data-ic="usuario"></i> Meu Painel</a>
                 <a href="#inicio">Início</a>
                 <a href="#clans">Clãs</a>
                 <a href="#historico">Temporadas</a>
@@ -158,15 +161,15 @@
         <p class="scroll-anim">União, estratégia e evolução desde 2017. Junte-se a uma comunidade ativa e conquiste o
             topo conosco!</p>
         <div class="hero-identidade scroll-anim">
-            <span class="badge badge-neutral">🏰 3 Clãs Ativos</span>
-            <span class="badge badge-neutral">📅 Desde 2017</span>
-            <span class="badge badge-gold">⚔️ Guerra Frequente</span>
+            <span class="badge badge-neutral"><i data-ic="cv"></i> 3 Clãs Ativos</span>
+            <span class="badge badge-neutral"><i data-ic="calendario"></i> Desde 2017</span>
+            <span class="badge badge-gold"><i data-ic="guerra"></i> Guerra Frequente</span>
         </div>
 
          <a href="https://link.clashofclans.com/pt?action=OpenClanProfile&tag=GUPJU0L2" 
             target="_blank"
             class="btn-entrar-jogo">
-             ⚔️ Entrar no Jogo
+             <i data-ic="guerra"></i> Entrar no Jogo
          </a>
 
     </header>
@@ -174,7 +177,7 @@
     <section id="guerra-ao-vivo" class="guerra-section">
         <!-- Atalho do Meu Painel: mostra as contas salvas neste celular -->
         <a href="https://clashcitybr.github.io/controle-cla/meu-painel.html" class="atalho-painel" id="atalho-painel">
-            <span class="atalho-painel-icone">👤</span>
+            <span class="atalho-painel-icone"><i data-ic="usuario"></i></span>
             <span class="atalho-painel-texto">
                 <b id="atalho-painel-titulo">Meu Painel</b>
                 <small id="atalho-painel-sub">Escolha suas contas e receba avisos da sua guerra</small>
@@ -240,7 +243,7 @@
             <div class="clan-card clan-parceiro scroll-anim">
                 <img src="estilos/Imagens/top1br.png" alt="TOP 1 BR" loading="lazy">
                 <h3>TOP 1 BR</h3>
-                <p><strong>🤝 Clã Parceiro</strong></p>
+                <p><strong><i data-ic="empate"></i> Clã Parceiro</strong></p>
                 <ul>
                     <li>Centro de Vila: 12+</li>
                     <li>Liga: Mestre 2</li>
@@ -256,7 +259,7 @@
     <section class="dashboard-section">
         <div class="dash-grid">
             <div class="mvp-card scroll-anim" id="mvp-container">
-                <span class="mvp-badge" id="mvp-badge">👑 MVP DA TEMPORADA</span>
+                <span class="mvp-badge"><i data-ic="coroa"></i> <span id="mvp-badge">MVP DA TEMPORADA</span></span>
                 <h3 id="mvp-nome" class="skeleton" style="font-size: 2rem; margin-bottom: 5px;">Carregando nome do MVP
                 </h3>
                 <p id="mvp-cv" class="skeleton" style="color: var(--primary); font-weight: 600; margin-bottom: 15px;">CV
@@ -271,12 +274,12 @@
 
             <!-- MURALHA DO MÊS — quem menos tomou estrelas na defesa -->
             <div class="mvp-card muralha-card scroll-anim" id="muralha-container" style="display:none;">
-                <span class="mvp-badge muralha-badge">🛡️ MURALHA DO MÊS</span>
+                <span class="mvp-badge muralha-badge"><i data-ic="escudo"></i> MURALHA DO MÊS</span>
                 <h3 id="muralha-nome" style="font-size: 2rem; margin-bottom: 5px; color:#bfdbfe;">--</h3>
                 <p id="muralha-cv" style="color: #93c5fd; font-weight: 600; margin-bottom: 15px;">CV --</p>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
                     <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">Defesas no mês</p>
-                    <h4 id="muralha-media" style="font-size: 1.8rem; color: #93c5fd;">0 🛡️</h4>
+                    <h4 id="muralha-media" style="font-size: 1.8rem; color: #93c5fd;">0</h4>
                 </div>
                 <p id="muralha-nota" style="font-size: 0.8rem; opacity: 0.85; margin-top: 12px;"></p>
             </div>
@@ -284,7 +287,7 @@
             <!-- BAGRE DO MÊS -->
             <div class="mvp-card scroll-anim" id="bagre-container"
                 style="display:none; background: linear-gradient(135deg, #7f1d1d, #450a0a); border-color: #ef4444;">
-                <span class="mvp-badge" style="background:#ef4444; color:#fff;">🐟 BAGRE DO MÊS</span>
+                <span class="mvp-badge" style="background:#ef4444; color:#fff;"><i data-ic="bagre"></i> BAGRE DO MÊS</span>
                 <h3 id="bagre-nome" style="font-size: 2rem; margin-bottom: 5px; color:#fca5a5;">--</h3>
                 <p id="bagre-cv" style="color: #ef4444; font-weight: 600; margin-bottom: 15px;">CV --</p>
                 <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
@@ -295,17 +298,17 @@
 
             <div class="stats-grid">
                 <div class="stat-box scroll-anim">
-                    <span class="stat-box-icone">👥</span>
+                    <span class="stat-box-icone"><i data-ic="grupo"></i></span>
                     <h4 id="stat-total-label">Membros Rastreados</h4>
                     <p class="number skeleton" id="stat-total">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
-                    <span class="stat-box-icone">⭐</span>
+                    <span class="stat-box-icone"><i data-ic="estrela"></i></span>
                     <h4 id="stat-pro-label">Atacantes PRO</h4>
                     <p class="number skeleton" id="stat-pro" style="color: #2ec4b6;">0</p>
                 </div>
                 <div class="stat-box scroll-anim">
-                    <span class="stat-box-icone">🏰</span>
+                    <span class="stat-box-icone"><i data-ic="cv"></i></span>
                     <h4>Centro de Vila Médio</h4>
                     <p class="number skeleton" id="stat-cv">--</p>
                 </div>
@@ -457,7 +460,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 // Durante a Liga o backend devolve a guerra da rodada com o campo "liga"
                 const naLiga = !!guerra.liga;
                 const seloLiga = naLiga
-                    ? `<span class="guerra-liga-selo">🏅 LIGA · RODADA ${guerra.liga.rodada}/${guerra.liga.totalRodadas}</span>`
+                    ? `<span class="guerra-liga-selo">${ic('premio')} LIGA · RODADA ${guerra.liga.rodada}/${guerra.liga.totalRodadas}</span>`
                     : '';
                 const linkLiga = naLiga
                     ? `<a class="guerra-liga-link" href="https://clashcitybr.github.io/liga/#guerras-liga">Ver todas as rodadas →</a>`
@@ -466,7 +469,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 if (guerra.state === 'notInWar') {
                     container.innerHTML = `
                         <div class="guerra-card guerra-neutra">
-                            <span class="guerra-badge">😴 SEM GUERRA</span>
+                            <span class="guerra-badge">${ic('dormindo')} SEM GUERRA</span>
                             <p>Nenhuma guerra em andamento no momento.</p>
                         </div>`;
                     return;
@@ -477,9 +480,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     container.innerHTML = `
                         <div class="guerra-card guerra-preparacao">
                             ${seloLiga}
-                            <span class="guerra-badge">⏳ PREPARAÇÃO</span>
+                            <span class="guerra-badge">${ic('ampulheta')} PREPARAÇÃO</span>
                             <p>Guerra contra <strong>${guerra.opponent?.name || 'adversário'}</strong> começa em ${formatarTempoRestante(inicio)}.</p>
-                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">🗺️ Ver mapa da guerra</a>
+                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">${ic('mapa')} Ver mapa da guerra</a>
                             ${linkLiga}
                         </div>`;
                     return;
@@ -496,12 +499,12 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                         }));
                     const chipsHtml = pendentes.length > 0
                         ? pendentes.map(m => `<span class="guerra-chip">${m.nome} (${m.ataquesFeitos}/${guerra.attacksPerMember})</span>`).join('')
-                        : '<span class="guerra-chip guerra-chip-ok">Todo mundo já atacou! 🎉</span>';
+                        : `<span class="guerra-chip guerra-chip-ok">${ic('festa')} Todo mundo já atacou!</span>`;
 
                     container.innerHTML = `
                         <div class="guerra-card guerra-ativa">
                             ${seloLiga}
-                            <span class="guerra-badge">⚔️ GUERRA EM ANDAMENTO</span>
+                            <span class="guerra-badge">${ic('guerra')} GUERRA EM ANDAMENTO</span>
                             <p class="guerra-placar">${guerra.clan?.name || 'Nós'} <strong>${guerra.clan?.stars ?? 0}★</strong>
                                 &nbsp;vs&nbsp;
                                 <strong>${guerra.opponent?.stars ?? 0}★</strong> ${guerra.opponent?.name || 'Adversário'}</p>
@@ -510,7 +513,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                                 <p class="guerra-pendentes-titulo">${pendentes.length > 0 ? `${pendentes.length} membro(s) ainda não atacaram:` : ''}</p>
                                 <div class="guerra-chips">${chipsHtml}</div>
                             </div>
-                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">🗺️ Ver mapa da guerra</a>
+                            <a class="guerra-mapa-link" href="https://clashcitybr.github.io/controle-cla/mapa.html">${ic('mapa')} Ver mapa da guerra</a>
                             ${linkLiga}
                         </div>`;
                     return;
@@ -521,7 +524,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     const estrelasAdversario = guerra.opponent?.stars ?? 0;
                     let resultado = 'EMPATE';
                     let classeResultado = 'guerra-empate';
-                    let icone = '🤝';
+                    let icone = ic('empate');
                     // Empate em estrelas se decide pela % de destruição (regra do jogo)
                     const nossaDestruicao = guerra.clan?.destructionPercentage ?? 0;
                     const destruicaoAdversario = guerra.opponent?.destructionPercentage ?? 0;
@@ -530,9 +533,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     const perdemos = nossasEstrelas < estrelasAdversario
                         || (nossasEstrelas === estrelasAdversario && nossaDestruicao < destruicaoAdversario);
                     if (vencemos) {
-                        resultado = 'VITÓRIA'; classeResultado = 'guerra-vitoria'; icone = '🏆';
+                        resultado = 'VITÓRIA'; classeResultado = 'guerra-vitoria'; icone = ic('trofeu');
                     } else if (perdemos) {
-                        resultado = 'DERROTA'; classeResultado = 'guerra-derrota'; icone = '💀';
+                        resultado = 'DERROTA'; classeResultado = 'guerra-derrota'; icone = ic('caveira');
                     }
 
                     container.innerHTML = `
@@ -553,7 +556,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 console.error('Aviso: guerra ao vivo indisponível.', error.message);
                 container.innerHTML = `
                     <div class="guerra-card guerra-erro">
-                        <span class="guerra-badge">⚠️ INDISPONÍVEL</span>
+                        <span class="guerra-badge">${ic('alerta')} INDISPONÍVEL</span>
                         <p>Não foi possível carregar o status da guerra agora. Tenta recarregar a página em instantes.</p>
                     </div>`;
             }
@@ -644,7 +647,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 document.getElementById('mvp-container').style.gridColumn = temporadaSemGuerras ? '1 / -1' : '';
                 if (campeaoAnterior) {
                     const c = campeaoAnterior.jogador;
-                    document.getElementById('mvp-badge').innerText = `👑 CAMPEÃO DE ${campeaoAnterior.nomeMes.toUpperCase()}`;
+                    document.getElementById('mvp-badge').innerText = `CAMPEÃO DE ${campeaoAnterior.nomeMes.toUpperCase()}`;
                     document.getElementById('mvp-nome').innerText = c.nome;
                     document.getElementById('mvp-cv').innerText = `Centro de Vila ${c.cv}`;
                     document.getElementById('mvp-media').innerText = `${(c.mediaEstrelas ?? 0).toFixed(1)} ★`;
@@ -743,7 +746,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 document.getElementById('muralha-nome').innerText = m.nome;
                 document.getElementById('muralha-cv').innerText = `Centro de Vila ${m.cv}`;
                 if (m.seguradas === undefined) return;   // backend antigo (regra velha): não mostra
-                document.getElementById('muralha-media').innerText = `${m.seguradas} 🛡️`;
+                document.getElementById('muralha-media').innerHTML = `${m.seguradas} ${ic('escudo')}`;
                 const partes = [`${m.seguradas}/${m.ataquesSofridos} ataques recebidos segurados`];
                 if (m.defesasPerfeitas > 0) partes.push(`${m.defesasPerfeitas} sem tomar estrela`);
                 document.getElementById('muralha-nota').innerText = partes.join(' · ');
