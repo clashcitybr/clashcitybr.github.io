@@ -753,6 +753,13 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                 for (const c of clas || []) {
                     const card = document.querySelector(`.clan-card[data-cla="${c.chave}"]`);
                     if (!card || c.erro) continue;
+                    // Emblema oficial do jogo (só imagens do servidor da Supercell); se falhar, volta o da pasta
+                    const img = card.querySelector('img');
+                    if (img && typeof c.escudo === 'string' && /^https:\/\/api-assets\.clashofclans\.com\//.test(c.escudo) && img.src !== c.escudo) {
+                        const original = img.getAttribute('src');
+                        img.onerror = () => { img.onerror = null; img.src = original; };
+                        img.src = c.escudo;
+                    }
                     if (c.cvMinimo) card.querySelector('[data-campo="cv"]').textContent = `Centro de Vila: ${c.cvMinimo}+`;
                     if (c.ligaGuerra) card.querySelector('[data-campo="liga"]').textContent = `Liga: ${c.ligaGuerra}`;
                     const chips = [];
