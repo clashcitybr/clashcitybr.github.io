@@ -117,6 +117,11 @@
         /* "Meu Painel" no menu: só no celular (no computador o atalho é o card) */
         .nav-links a.nav-painel { color: #f9d246; font-weight: 800; }
         @media (min-width: 901px) { .nav-links a.nav-painel { display: none; } }
+        /* Cartões dos clãs com dados ao vivo */
+        .clan-ao-vivo { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 10px; }
+        .clan-ao-vivo span { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #f1edf8; color: #3b2a5c; }
+        .clan-ao-vivo .sequencia { background: #fff3c4; color: #8a5a00; }
+        .clan-ao-vivo .ic { width: 1em; height: 1em; vertical-align: -0.15em; }
         .atalho-painel-seta { font-size: 1.8rem; color: #077187; flex-shrink: 0; line-height: 1; }
     </style>
     <!-- Ícones comuns (se não carregar, a página segue sem eles) -->
@@ -203,13 +208,13 @@
     <section id="clans" class="clans-section">
         <h2 style="text-align:center; font-size: 2.5rem;" class="scroll-anim">Nossos Clãs</h2>
         <div class="clans-container">
-            <div class="clan-card scroll-anim">
+            <div class="clan-card scroll-anim" data-cla="principal">
                 <img src="estilos/Imagens/Clashcity.png" alt="Clash City BR" loading="lazy">
                 <h3>CLASH CITY BR</h3>
                 <p><strong>Clã Principal</strong></p>
                 <ul>
-                    <li>Centro de Vila: 18+</li>
-                    <li>Liga: Campeão 3</li>
+                    <li data-campo="cv">Centro de Vila: 18+</li>
+                    <li data-campo="liga">Liga: Campeão 3</li>
                     <li>Guerra Frequente</li>
                     <li>Vagas Limitadas</li>
                 </ul>
@@ -217,13 +222,13 @@
                     class="btn-join btn-external">Solicitar Entrada</a>
             </div>
 
-            <div class="clan-card scroll-anim">
+            <div class="clan-card scroll-anim" data-cla="cla2">
                 <img src="estilos/Imagens/clashcitybr2.png" alt="Clash City BR 2" loading="lazy">
                 <h3>CLASH CITY BR 2</h3>
                 <p><strong>Secundário</strong></p>
                 <ul>
-                    <li>Centro de Vila: 15+</li>
-                    <li>Liga: Campeão 3</li>
+                    <li data-campo="cv">Centro de Vila: 15+</li>
+                    <li data-campo="liga">Liga: Campeão 3</li>
                     <li>Foco em Evolução</li>
                     <li>Usado para Ligas</li>
                 </ul>
@@ -231,13 +236,13 @@
                     class="btn-join btn-external">Solicitar Entrada</a>
             </div>
 
-            <div class="clan-card scroll-anim">
+            <div class="clan-card scroll-anim" data-cla="cla3">
                 <img src="estilos/Imagens/clashcitybr3.png" alt="Clash City BR 3" loading="lazy">
                 <h3>CLASH CITY BR 3</h3>
                 <p><strong>Terciário</strong></p>
                 <ul>
-                    <li>Centro de Vila: 12+</li>
-                    <li>Liga: Mestre 3</li>
+                    <li data-campo="cv">Centro de Vila: 12+</li>
+                    <li data-campo="liga">Liga: Mestre 3</li>
                     <li>Aberto a Novatos</li>
                     <li>Dicas e Treino</li>
                 </ul>
@@ -246,13 +251,13 @@
             </div>
 
             <!-- Clã parceiro (não faz parte da família Clash City BR) -->
-            <div class="clan-card clan-parceiro scroll-anim">
+            <div class="clan-card clan-parceiro scroll-anim" data-cla="parceiro">
                 <img src="estilos/Imagens/top1br.png" alt="TOP 1 BR" loading="lazy">
                 <h3>TOP 1 BR</h3>
                 <p><strong><i data-ic="empate"></i> Clã Parceiro</strong></p>
                 <ul>
-                    <li>Centro de Vila: 12+</li>
-                    <li>Liga: Mestre 2</li>
+                    <li data-campo="cv">Centro de Vila: 12+</li>
+                    <li data-campo="liga">Liga: Mestre 2</li>
                     <li>Aberto a Novatos</li>
                     <li>Guerra Frequente</li>
                 </ul>
@@ -739,6 +744,35 @@ document.querySelectorAll('.nav-links a').forEach(link => {
             document.getElementById('atalho-painel-sub').textContent = sub;
         }
 
+        // Cartões "Nossos Clãs": nível, liga, sequência e recorde direto da API
+        async function carregarResumoClas() {
+            try {
+                const resp = await fetch(`${API_URL}/clas/resumo`, { headers: { 'ngrok-skip-browser-warning': 'true' } });
+                if (!resp.ok) return;   // backend antigo: os cartões ficam com o texto fixo
+                const { clas } = await resp.json();
+                for (const c of clas || []) {
+                    const card = document.querySelector(`.clan-card[data-cla="${c.chave}"]`);
+                    if (!card || c.erro) continue;
+                    if (c.cvMinimo) card.querySelector('[data-campo="cv"]').textContent = `Centro de Vila: ${c.cvMinimo}+`;
+                    if (c.ligaGuerra) card.querySelector('[data-campo="liga"]').textContent = `Liga: ${c.ligaGuerra}`;
+                    const chips = [];
+                    if (c.nivel) chips.push(`<span>Nível ${Number(c.nivel)}</span>`);
+                    if (c.membros != null) chips.push(`<span>${Number(c.membros)}/50 membros</span>`);
+                    if (c.sequencia >= 3) chips.push(`<span class="sequencia">${ic('fogo')} ${Number(c.sequencia)} vitórias seguidas</span>`);
+                    if (c.vitorias != null) chips.push(`<span>${Number(c.vitorias)} guerras vencidas</span>`);
+                    let linha = card.querySelector('.clan-ao-vivo');
+                    if (!linha) {
+                        linha = document.createElement('div');
+                        linha.className = 'clan-ao-vivo';
+                        card.querySelector('ul')?.before(linha);
+                    }
+                    linha.innerHTML = chips.join('');
+                }
+            } catch (e) {
+                console.warn('Resumo dos clãs indisponível:', e.message);
+            }
+        }
+
         async function carregarMuralha() {
             try {
                 const resp = await fetch(`${API_URL}/defesas`, {
@@ -1000,6 +1034,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
             carregarGuerraAoVivo();
             carregarDashboard();
             carregarMuralha();
+            carregarResumoClas();
             atualizarAtalhoPainel();
             carregarHistorico();
             carregarInstagram();
