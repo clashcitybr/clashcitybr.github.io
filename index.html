@@ -118,9 +118,24 @@
         .nav-links a.nav-painel { color: #f9d246; font-weight: 800; }
         @media (min-width: 901px) { .nav-links a.nav-painel { display: none; } }
         /* Cartões dos clãs com dados ao vivo */
-        .clan-ao-vivo { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 10px; }
-        .clan-ao-vivo span { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #f1edf8; color: #3b2a5c; }
+        /* Sempre os mesmos 4 espaços (2x2): todos os cartões ficam com a mesma altura e alinhados */
+        .clan-ao-vivo { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 4px 0 12px; }
+        .clan-ao-vivo span { font-size: 0.72rem; font-weight: 700; padding: 4px 6px; border-radius: 999px; background: #f1edf8; color: #3b2a5c;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
         .clan-ao-vivo .sequencia { background: #fff3c4; color: #8a5a00; }
+        .clan-ao-vivo .vazio { visibility: hidden; }
+        /* Cartão em coluna: o botão "Solicitar Entrada" fica sempre no pé, na mesma linha em todos */
+        .clans-container .clan-card { display: flex; flex-direction: column; }
+        /* Emblema num quadrado fixo: imagens de tamanhos diferentes não desalinham o resto */
+        .clans-container .clan-card img { align-self: center; width: 120px; height: 120px; object-fit: contain; }
+        @media (max-width: 900px) { .clans-container .clan-card img { width: 80px; height: 80px; } }
+        @media (max-width: 600px) { .clans-container .clan-card img { width: 55px !important; height: 55px; } }
+        .clans-container .clan-card .btn-join { margin-top: auto; }
+        .clans-container .clan-card ul { margin-bottom: 18px; }
+        @media (max-width: 600px) {
+            .clan-ao-vivo { grid-template-columns: 1fr; gap: 4px; }
+            .clan-ao-vivo span { font-size: 0.66rem; padding: 3px 4px; }
+        }
         .clan-ao-vivo .ic { width: 1em; height: 1em; vertical-align: -0.15em; }
         .atalho-painel-seta { font-size: 1.8rem; color: #077187; flex-shrink: 0; line-height: 1; }
     </style>
@@ -762,11 +777,14 @@ document.querySelectorAll('.nav-links a').forEach(link => {
                     }
                     if (c.cvMinimo) card.querySelector('[data-campo="cv"]').textContent = `Centro de Vila: ${c.cvMinimo}+`;
                     if (c.ligaGuerra) card.querySelector('[data-campo="liga"]').textContent = `Liga: ${c.ligaGuerra}`;
-                    const chips = [];
-                    if (c.nivel) chips.push(`<span>Nível ${Number(c.nivel)}</span>`);
-                    if (c.membros != null) chips.push(`<span>${Number(c.membros)}/50 membros</span>`);
-                    if (c.sequencia >= 3) chips.push(`<span class="sequencia">${ic('fogo')} ${Number(c.sequencia)} vitórias seguidas</span>`);
-                    if (c.vitorias != null) chips.push(`<span>${Number(c.vitorias)} guerras vencidas</span>`);
+                    // Sempre 4 espaços, na mesma ordem; o que não tem fica invisível (mantém o alinhamento)
+                    const vazio = '<span class="vazio">–</span>';
+                    const chips = [
+                        c.nivel ? `<span>Nível ${Number(c.nivel)}</span>` : vazio,
+                        c.membros != null ? `<span>${Number(c.membros)}/50 membros</span>` : vazio,
+                        c.vitorias != null ? `<span title="Guerras vencidas">${Number(c.vitorias)} vitórias</span>` : vazio,
+                        c.sequencia >= 3 ? `<span class="sequencia" title="Vitórias seguidas">${ic('fogo')} ${Number(c.sequencia)} seguidas</span>` : vazio
+                    ];
                     let linha = card.querySelector('.clan-ao-vivo');
                     if (!linha) {
                         linha = document.createElement('div');
