@@ -40,7 +40,7 @@ flowchart LR
     F -- fetch / JSON --> A[REST API<br/>Node.js + Express]
     A --> D[(MongoDB Atlas<br/>via Prisma)]
     A -- scheduled jobs --> S[Supercell API<br/>via static-IP proxy]
-    A --> W[WhatsApp<br/>whatsapp-web.js]
+    A --> W[WhatsApp<br/>Baileys]
 ```
 
 The project is split into four repositories:
@@ -55,7 +55,7 @@ The project is split into four repositories:
 ## Tech stack
 
 **Frontend:** HTML5, CSS3 (custom properties, Grid, Flexbox), vanilla JavaScript (ES6+), Chart.js, Service Worker / PWA
-**Backend:** Node.js, Express, Prisma ORM, MongoDB Atlas, cron jobs, whatsapp-web.js
+**Backend:** Node.js, Express, Prisma ORM, MongoDB Atlas, cron jobs, Baileys
 **Integrations:** Supercell Clash of Clans API
 **Infra:** GitHub Pages (frontend), Linux VM with PM2 (backend), Android TWA (Google Play closed testing)
 
